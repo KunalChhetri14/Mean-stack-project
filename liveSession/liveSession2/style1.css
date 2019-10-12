@@ -1,0 +1,30 @@
+body
+{
+    
+}
+
+table
+{
+    font-family: arial, sans-serif;
+    font-size: 20px;
+    border-color: black;
+    color:black;
+    width: 50%;
+    border-collapse: collapse;
+}
+
+#head
+{
+    widows: 100%;
+    margin:0px;
+    background-color: #bbbbbb;
+}
+
+tr:nth-child(even)
+{
+    background-color: #dddddd
+}
+td,th{
+    text-align: center;
+    padding: 2px;
+}
