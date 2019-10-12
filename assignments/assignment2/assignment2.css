@@ -1,0 +1,29 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+#root
+{
+   
+    padding:10px 10px 1px 1px;                
+    background-color: white;
+    height:100%;
+}
+
+form{
+    border-color:#dddd;
+    border:1px solid;
+    
+    
+}
+
+
+input[type=text]:focus,input[type=email]:focus
+{
+   background-color:#dddd
+}    
