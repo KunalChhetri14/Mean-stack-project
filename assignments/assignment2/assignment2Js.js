@@ -1,23 +1,45 @@
-ob={};
-function submitbutton()
+var i=0;
+
+function EnableOrDisable() {
+  var status=document.getElementById("EnDis").value;
+  if(status=="DISABLE")
+  {
+    // alert("this ");
+      document.getElementById("name").readOnly=true;
+      document.getElementById("email").readOnly=true;
+      document.getElementById("place").readOnly=true;
+      document.getElementById("mobNo").readOnly=true;
+      //document.getElementsByClassName("read").readOnly=true;
+      document.getElementById("EnDis").value="ENABLE";
+      document.getElementById("EnDis").setAttribute("class","btn btn-success");
+  }
+  else{
+    //document.getElementsByClassName("read").readOnly=false;
+
+    document.getElementById("name").readOnly=false;
+    document.getElementById("email").readOnly=false;
+    document.getElementById("place").readOnly=false;
+    document.getElementById("mobNo").readOnly=false;
+    document.getElementById("EnDis").value="DISABLE";
+    document.getElementById("EnDis").setAttribute("class","btn btn-danger");
+  }
+
+}
+
+
+function submitting()
 {
-    
-    ob['name']=document.getElementById('name').value;
-    ob['email']=document.getElementById('email').value;
-    ob['place']=document.getElementById('place').value;
-    ob['mobNo']=document.getElementById('mobNo').value;
-    //alert("Name is "+ ob['name'])+ " email "+ob['email']+ " place is " + ob['place']+ " Mobile NO"+ob[mobNo];
-    console.log("inside submit");
-    console.log(ob);
-    //console.log("the "+pname);  not working
+  obj={};
+  var name=document.getElementById("name").value;
+  var email=document.getElementById("email").value;
+  var mobNo=document.getElementById("mobNo").value;
+  var place=document.getElementById("place").value;
+  obj['name']=name;
+  obj['email']=email;
+  obj['mobNo']=mobNo;
+  obj['place']=place;
+  console.log(obj);
 }
 
 
 
-function disable()
-{
-  document.getElementById('name').style.display="none";  
-  document.getElementById('idDisable').style.backgroundColor="green";
-  
-   //alert("set");
-}

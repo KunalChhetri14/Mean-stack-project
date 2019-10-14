@@ -1,44 +1,41 @@
 <html>
     <head>
             <script src="assignment2Js.js"></script>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
             <link rel ="stylesheet" type="text/css" href="assignment2.css">    
     </head>
     <body>
-        <div id="root">
-            <div><h1>Please fill the details:</h1></div>
+            <h1>Please fill the details:</h1>
             <form>
-                <div style="padding: 10px;">
-                    
-                    <label>NAME  : </label>
-                   
-                    <input id="name" type="text" placeholder="Kunal Chhetri" size="20" >
-                     &nbsp
-                    <label>EMAIL : </label>
-                    <br>
-                    <input id="email" type="text" placeholder="kunalchhetri14@gmail.com" size=30 >
-                    <br>
-                
-                    <br>
-                    <label>PLACE :</label>
-                    <br>
-                    <input id="place" type="text" placeholder="Bangalore" size=20 >
-                    <br><br>
-
-                    <label>Mobile No :</label>
-                    <br><br>
-                    <input id="mobNo"  style="width:100%" type="text" placeholder="3495947595" size=10 >
-                    <br>
-                    <br>
-                    <button onclick="submitbutton()">SUBMIT</button> 
-                    &nbsp 
-                    <button type="reset">RESET</button>
-                    &nbsp;
-                    <button id="idDisable" onclick="disable()">DISABLE</button>
+                <div class="form-group read">
+                    <label for="name1">NAME  : </label>
+                    <input id="name"  type="text" class="form-control" placeholder="Kunal Chhetri" size="20" >
                 </div>
+                
+                <div class="form-group read">
+                    <label for="exampleInputEmail1">EMAIL : </label>
+                    <input id="email" type="text" class="form-control" placeholder="kunalchhetri14@gmail.com" size=30 >
+                </div>    
+                
+                <div class="form-group read">
+                    <label>PLACE :</label>
+                    <input id="place" type="text" class="form-control" placeholder="Bangalore" size=20 >
+                </div>  
+
+                <div class="form-group read">
+                    <label>Mobile No :</label>
+                    <input id="mobNo" class="form-control" style="width:100%" type="text" class="form-control" placeholder="3495947595" size=10 >
+                </div>
+
+           
+                <div> 
+                    <input type="button" value="SUBMIT" onclick="submitting()" class="btn btn-primary"> 
+                    <button type="reset"   class="btn btn-primary">RESET</button>
+                    <input type="button"  value="DISABLE"   id="EnDis"  class="btn btn-danger" onclick="EnableOrDisable()">
                     
-            
-            
-            </form>
-        </div>
+                </div>
+            </form>       
     </body>
 </html>
