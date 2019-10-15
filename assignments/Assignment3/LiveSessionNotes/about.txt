@@ -1,0 +1,40 @@
+var name="Ajay"
+class Person
+{
+    print_name()
+    {
+        console.log(name);
+    }
+}
+
+var person=new Person();
+person.print_name();
+
+O/P : Ajay
+
+
+
+Scoping :
+var -> function scoped
+let -> block scoped
+const -> initialized at the time of declaration , used to make variable final, Ex: used for writng base url
+
+See example timout.html, check console shows error for let.
+
+TEMPLATE LITERAL:
+allows embedded expressions.
+var a="kunal"
+console.log(`My name is ${a}`);
+O/P - kunal
+
+CLASS in 1 file:
+*debugging issues.
+*hard to keep things separate.
+*merge issues while working in a team.
+
+
+
+
+
+
+
