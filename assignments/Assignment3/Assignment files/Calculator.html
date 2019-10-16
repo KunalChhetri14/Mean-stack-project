@@ -1,17 +1,52 @@
 <html>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <link rel ="stylesheet" type="text/css" href="Calculator.css">  
+    <script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <link rel ="stylesheet" type="text/css" href="Calculator.css"> 
+    <script src="Parent.js"></script> 
 
 <body>
     
-    <div class="table-responsive rootClass">
-        <tr>
-                <td width=100% aria-rowspan="4"><label id="resultLabel" placeholder=0 ></td>
-               
-        </tr>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                        <th colspan="4"><label id="resultLabel" >0</label></th>
+                            <br>
+                </tr>
+                     
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="button" onclick="new Parent().display(this)" value=1 class="btn btn-default"></td>
+                    <td><input type="button" value=2 onclick="new Parent().display(this)" class="btn btn-default"></td>
+                    <td><input type="button" value=3 onclick="new Parent().display(this)" class="btn btn-default"></td>
+                    <td><input type="button" onclick="new Parent().display(this)" value='+' class="btn btn-default"></td>
+                </tr>
+                
+                
+                <tr>
+                        <td><input type="button" value=4 onclick="new Parent().display(this)" class="btn btn-default"></td>
+                        <td><input type="button" value=5 onclick="new Parent().display(this)" class="btn btn-default"></td>
+                        <td><input type="button" value=6 onclick="new Parent().display(this)" class="btn btn-default"></td>
+                        <td><input type="button" value='-' onclick="new Parent().display(this)" class="btn btn-default"></td>
+                </tr>
 
+                <tr>
+                        <td><input type="button" value=7 onclick="new Parent().display(this)" class="btn btn-default"></td>
+                        <td><input type="button" value=8 onclick="new Parent().display(this)" class="btn btn-default"></td>
+                        <td><input type="button" value=9 onclick="new Parent().display(this)" class="btn btn-default"></td>
+                        <td><input type="button" value='*' onclick="new Parent().display(this)" class="btn btn-default"></td>    
+                </tr>
+
+                <tr>
+                        <td><input type="button" value='C' onclick="new Parent().display(this)" class="btn btn-default"></td>
+                        <td><input type="button" value=0 onclick="new Parent().display(this)" class="btn btn-default"></td>
+                        <td><input type="button" value='=' onclick="new Parent().display(this)" class="btn btn-default"></td>
+                        <td><input type="button" value='/' onclick="new Parent().display(this)" class="btn btn-default"></td>
+                </tr>
+            </tbody>
+        </table>
       
         
 

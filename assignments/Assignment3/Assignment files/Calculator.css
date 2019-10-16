@@ -1,3 +1,28 @@
-rootClass{
+table {
+    margin: auto;
+    
+    width: 295px;
+    max-width: 295px;
+    
     text-align: center;
+    border-radius: 10px;
+    padding-right: 10px;
+  }
+
+input{
+    position: relative;
+    left:5px;
+    
 }
+
+.tablediv
+{
+    text-align: center;
+    width:50%;
+}
+#resultLabel
+{
+    border:1px black;
+    text-align:right;
+}
+
