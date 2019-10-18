@@ -11,39 +11,40 @@
         <table class="table">
             <thead>
                 <tr>
-                        <th colspan="4"><label id="resultLabel" >0</label></th>
+                        <th colspan="3"><label id="resultLabel" >0</label></th>
+                        <th><input type="button" onclick="new Parent().display(this)" value="X" class="btn btn-default"></th>
                             <br>
                 </tr>
                      
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="button" onclick="new Parent().display(this)" value=1 class="btn btn-default"></td>
-                    <td><input type="button" value=2 onclick="new Parent().display(this)" class="btn btn-default"></td>
-                    <td><input type="button" value=3 onclick="new Parent().display(this)" class="btn btn-default"></td>
-                    <td><input type="button" onclick="new Parent().display(this)" value='+' class="btn btn-default"></td>
+                    <td><input type="button" onclick="CallObject(this)" value=1 class="btn btn-default"></td>
+                    <td><input type="button" value=2 onclick="CallObject(this)" class="btn btn-default"></td>
+                    <td><input type="button" value=3 onclick="CallObject(this)" class="btn btn-default"></td>
+                    <td><input type="button" onclick="CallObject(this)" value='+' class="btn btn-default"></td>
                 </tr>
                 
                 
                 <tr>
-                        <td><input type="button" value=4 onclick="new Parent().display(this)" class="btn btn-default"></td>
-                        <td><input type="button" value=5 onclick="new Parent().display(this)" class="btn btn-default"></td>
-                        <td><input type="button" value=6 onclick="new Parent().display(this)" class="btn btn-default"></td>
-                        <td><input type="button" value='-' onclick="new Parent().display(this)" class="btn btn-default"></td>
+                        <td><input type="button" value=4 onclick="CallObject(this)" class="btn btn-default"></td>
+                        <td><input type="button" value=5 onclick="CallObject(this)" class="btn btn-default"></td>
+                        <td><input type="button" value=6 onclick="CallObject(this)" class="btn btn-default"></td>
+                        <td><input type="button" value='-' onclick="CallObject(this)" class="btn btn-default"></td>
                 </tr>
 
                 <tr>
-                        <td><input type="button" value=7 onclick="new Parent().display(this)" class="btn btn-default"></td>
-                        <td><input type="button" value=8 onclick="new Parent().display(this)" class="btn btn-default"></td>
-                        <td><input type="button" value=9 onclick="new Parent().display(this)" class="btn btn-default"></td>
-                        <td><input type="button" value='*' onclick="new Parent().display(this)" class="btn btn-default"></td>    
+                        <td><input type="button" value=7 onclick="CallObject(this)" class="btn btn-default"></td>
+                        <td><input type="button" value=8 onclick="CallObject(this)" class="btn btn-default"></td>
+                        <td><input type="button" value=9 onclick="CallObject(this)" class="btn btn-default"></td>
+                        <td><input type="button" value='*' onclick="CallObject(this)" class="btn btn-default"></td>    
                 </tr>
 
                 <tr>
-                        <td><input type="button" value='C' onclick="new Parent().display(this)" class="btn btn-default"></td>
-                        <td><input type="button" value=0 onclick="new Parent().display(this)" class="btn btn-default"></td>
-                        <td><input type="button" value='=' onclick="new Parent().display(this)" class="btn btn-default"></td>
-                        <td><input type="button" value='/' onclick="new Parent().display(this)" class="btn btn-default"></td>
+                        <td><input type="button" value='C' onclick="CallObject(this)" class="btn btn-default"></td>
+                        <td><input type="button" value=0 onclick="CallObject(this)" class="btn btn-default"></td>
+                        <td><input type="button" value='=' onclick="CallObject(this)" class="btn btn-default"></td>
+                        <td><input type="button" value='/' onclick="CallObject(this)" class="btn btn-default"></td>
                 </tr>
             </tbody>
         </table>
