@@ -10,7 +10,6 @@ CallObject=function(val)
    {
       //alert("first time object creation");
       parentObj=new Parent();
-      parentObj.display(val);
    }
    else
    {

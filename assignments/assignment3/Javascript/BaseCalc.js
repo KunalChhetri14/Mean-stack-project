@@ -1,9 +1,7 @@
-//import {ParentClass} from './ParentClass';
-// const lib = require('./ParentClass') 
-
+import {ParentClass} from './ParentClass'
 baseObj=null;
 
-
+// const lib=require('./ParentClass');
 displayBase=function()
 {
     alert("kunal");
@@ -35,7 +33,7 @@ CallObject=function(val)
    }
 }
 
-class BaseCalc
+class BaseCalc extends ParentClass
 {
     operatorStatus=false;
     labelvalue="";
@@ -153,15 +151,17 @@ class BaseCalc
         {
             this.labelvalue=labelvalue.substring(0,this.labelvalue.length-1);
         }
+        console.log("outside = value "+this.labelvalue);
         // promise1.bind(this);
-        // var promise1=new Promise(function(resolve,reject){
-        //     setTimeout(() => {
-        //         alert("Before indide eval");
-        //         this.labelvalue=eval(this.labelvalue);
-        //         alert("After indide eval");
-        //         return k;
-        //     }, 3000);//eval(this.labelvalue);
-        // });
+        var promise1=new Promise(function(resolve,reject){
+          console.log("label value is "+this.labelvalue);
+            setTimeout(() => {
+                alert("Before indide eval");
+                this.labelvalue=eval(this.labelvalue);
+                alert("After indide eval");
+                return this.labelvalue;
+            }, 1000);//eval(this.labelvalue);
+        });
 
         this.labelvalue=eval(this.labelvalue);
         
@@ -316,21 +316,26 @@ class BaseCalc
       } 
       
       // labelvalue=labelvalue+a.value;
-    //   if(val=='=')
-    //   {
-    //     promise1.then(function(value)
-    //     {
-    //       alert("Yes as promised")
-    //     }).catch("error")
+      if(val=='=')
+      {
+        promise1.then(function(value)
+        {
+          alert("Yes as promised")
+        });
 
-    //     // promise1.reject(function(reason){
-    //     //     alert(reason);
-    //     // });
-    //   }
+        promise1.catch()
+        {
+          console.log("inside catch of promise");
+        }
 
-    //   else{
+        // promise1.reject(function(reason){
+        //     alert(reason);
+        // });
+      }
+
+      else{
         document.getElementById("resultLabel").innerHTML=this.labelvalue;
-     // }
+     }
       
       // console.log("paerjr " +a.value);
       console.log("Array elements is "+ this.labelvalue);
