@@ -1,4 +1,4 @@
-import {ParentClass} from './ParentClass'
+//import {ParentClass} from './ParentClass'
 baseObj=null;
 
 // const lib=require('./ParentClass');
@@ -33,7 +33,7 @@ CallObject=function(val)
    }
 }
 
-class BaseCalc extends ParentClass
+class BaseCalc
 {
     operatorStatus=false;
     labelvalue="";
