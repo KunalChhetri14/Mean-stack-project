@@ -1,0 +1,7 @@
+[{"id":1,"name":"Mutton","Price":530,"Unit":"PerKg","Image":""},
+{"id":2,"name":"Chicken","Price":200,"Unit":"PerKg","Image":""},
+{"id":3,"name":"Potato","Price":30,"Unit":"PerKg","Image":""},
+{"id":5,"name":"Onion","Price":50,"Unit":"PerKg","Image":""},
+{"id":6,"name":"Egg","Price":30,"Unit":"Pack of Six","Image":""},
+{"id":7,"name":"Tomato","Price":35,"Unit":"PerKg","Image":""},
+{"id":8,"name":"Banana","Price":40,"Unit":"PerKg","Image":""}]
