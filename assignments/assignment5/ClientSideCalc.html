@@ -1,0 +1,67 @@
+<html>
+    <head>
+            <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+       
+        <link rel="stylesheet" type="text/css" href="clientside.css">
+        <script>
+
+            function setValues(ele)
+            {
+                let labVal=document.getElementById('labelname').value;
+                labVal+=ele;
+                document.getElementById('labelname').value=labVal;
+            }
+        </script>
+        
+    </head>
+    <body>
+        <div id="first">
+            <h1>cool</h1>
+        <form class="form-group" method="POST" action="http://localhost:3000/" >
+            <table>
+                <tr> 
+                    <td colspan="4">
+                            <input id="labelname" name="labelField" type="text" class="form-control"/>
+                    </td>
+                        
+                </tr>
+
+                <tr>
+                    <td><input type="button" value=1 onclick="setValues(this.value)" class="btn btn-default"></td>
+                    <td><input type="button" value=2 onclick="setValues(this.value)" class="btn btn-default"></td>
+                    <td><input type="button" value=3 onclick="setValues(this.value)" class="btn btn-default"></td>
+
+                    <td><input type="button" value=4 onclick="setValues(this.value)" class="btn btn-default"></td>
+                </tr>
+
+                <tr>
+                        <td><input type="button" value=5 onclick="setValues(this.value)" class="btn btn-default"></td>
+                        <td><input type="button" value=6 onclick="setValues(this.value)" class="btn btn-default"></td>
+                         <td><input type="button" value=7 onclick="setValues(this.value)" class="btn btn-default"></td>
+                        <td><input type="button" value=8 onclick="setValues(this.value)" class="btn btn-default"></td>
+                </tr>       
+                        
+                      
+                <tr>
+                    <td><input type="button" value=9 onclick="setValues(this.value)" class="btn btn-default"></td>
+                    <td><input type="button" value=0 onclick="setValues(this.value)" class="btn btn-default"></td>
+                    <td><input type="reset" value='C'  class="btn btn-default"></td>
+                    <td><input type="submit" value='='  class="btn btn-default"></td>
+                </tr>
+
+                <tr>
+                        <td><input type="button" value='+' onclick="setValues(this.value)" class="btn btn-default"></td>
+                        <td><input type="button" value='-' onclick="setValues(this.value)" class="btn btn-default"></td>
+                        <td><input type="button" value='/'  class="btn btn-default"></td>
+                        <td><input type="button" value='*'  class="btn btn-default"></td>
+                    </tr>
+
+
+            </table>
+            
+        </form>
+    </div>
+    </body>
+</html>
