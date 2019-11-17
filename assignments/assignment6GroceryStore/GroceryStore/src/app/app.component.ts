@@ -15,6 +15,15 @@ export class AppComponent {
   {
     
   }
+
+
+
+  // receiveMessage($event)
+  // {
+  //   this.Cart.push($event);
+  //   console.log("INSIDE REVEICE OF PARENT ");
+  //   console.log(this.Cart);
+  // }
   ngOnInit()
   {
     this.getItemsService.getdata().subscribe(data=>this.name=data);
@@ -48,7 +57,7 @@ export class AppComponent {
 
   getCartItems()
   {
-    this.Cart=this.getItemsService.getCartContents();
+    this.getItemsService.getCartContents();
     console.log(this.Cart);
   }
   

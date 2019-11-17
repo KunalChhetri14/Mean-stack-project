@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GetGroceryListService } from '../get-grocery-list.service';
 
 @Component({
@@ -14,6 +14,9 @@ export class ItemsComponentComponent implements OnInit {
   title = 'GroceryStore';
   name=[];
   Cart=[];
+  NoItems=0;
+
+ 
  
   constructor(private getItemsService:GetGroceryListService)
   {
@@ -22,40 +25,29 @@ export class ItemsComponentComponent implements OnInit {
   ngOnInit()
   {
     this.getItemsService.getdata().subscribe(data=>this.name=data);
+    console.log("inside init of items component");
   }
   addCar(ButtonStore,itemDetails)
   {
-    console.log("inside cart");
-    
-    console.log("after butt");
-    //console.log(itemDetails);
-    this.getItemsService.addToCart(itemDetails);
-    console.log(this.getItemsService.getCartContents);
-    // var status=document.getElementById("EnDis").value;
     if(ButtonStore.innerHTML=="Add To Cart")
     {
+      this.getItemsService.addToCart(itemDetails);
       ButtonStore.innerHTML="Remove from Cart";
       ButtonStore.setAttribute("class","btn btn-danger");
-
+      this.NoItems+=1;
+     
     }
     else
     {
+      this.getItemsService.removeFromCart(itemDetails);
       ButtonStore.innerHTML="Add To Cart";
       ButtonStore.setAttribute("class","btn btn-success");
+      this.NoItems-=1;
     }
    
 
 
 
   }
-
-
-  getCartItems()
-  {
-    this.Cart=this.getItemsService.getCartContents();
-    console.log(this.Cart);
-  }
-  
-
 }
 

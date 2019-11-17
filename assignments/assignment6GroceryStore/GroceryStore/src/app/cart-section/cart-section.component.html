@@ -1,31 +1,34 @@
-<p>cart-section works!</p>
-<html>
-    <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<p>cart-   section works! </p>
 
-    </head>
-
-    <body>
         <table class="table table-dark">
-            <tr>
+            <tr> 
                 <th>ITEM</th>
                 <th>Price</th>
                 <th>QUANTITY</th>
                 <th>Amount</th>
             </tr>
             
-            <tr *ngFor="let item of cartContents;">
+            <tr *ngFor="let item of dataArray;">
                 <td>{{item.name}}</td>
                 <td>{{item.Price}}</td>
-                <td>{{item.Quantity}}</td>
+                <td><button #template  class="btn btn-danger" (click)="Decrease(template,item)">-</button>
+                    {{item.Quantity}}
+                    <button #template  class="btn btn-success" (click)="Increase(template,item)">+</button>
+                </td>
                 <td>{{item.Amount}}</td>
 
             </tr>
+            <tr>
+                <td></td>
+                <td>Total</td>
+                <td><b>{{TotalQuantity}}</b></td>
+                <td><b>{{TotalSum}}</b></td>
+            </tr>
+
+            
+            
 
         </table>
+        <div><button class="btn btn-success" (click)="placeOrder()">PLACE ORDER</button></div>
 
-    </body>
-
-</html>
+   
