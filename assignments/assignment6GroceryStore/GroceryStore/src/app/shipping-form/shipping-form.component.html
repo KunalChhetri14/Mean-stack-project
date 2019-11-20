@@ -1,1 +1,53 @@
 <p>shipping-form works!</p>
+<div class="col-md-5">
+<form  [formGroup]="courseForm"  (ngSubmit)="onSubmit()">
+    <div class="form-group">
+    Name:
+    <input class="form-control" type="text" formControlName="Name">     
+    </div>
+    
+    <div class="form-group">
+    Address :
+        <input class="form-control" type="text" formControlName="Address">     
+    </div>
+    
+
+    <div class="form-group">
+    Phone No :
+        <input class="form-control" type="text" formControlName="PhoneNo">     
+    </div>
+    
+
+    <div class="form-group">
+    Postal Code :
+        <input class="form-control" type="text" formControlName="Postal Code">     
+    </div>
+    <button class="btn btn-success" type="submit" [disabled]="!courseForm.valid">Submit</button>
+    
+
+    
+</form>
+</div>
+
+
+<br>
+
+<div class="col-md-5 form-group" style="border:thin solid rgb(22, 21, 21); padding: 10px;">
+Order Summary
+<br>
+<table>
+<tr *ngFor="let item of FinalBill;">
+    <td>{{item.name}}</td>
+    <td>{{item.Quantity}}</td>
+    <td>{{item.Amount}}</td>
+
+</tr>
+<tr>
+    <td>Total</td>
+    <td></td>
+    <td>{{TotalSum}}</td>
+</tr>
+</table>
+
+</div>
+
