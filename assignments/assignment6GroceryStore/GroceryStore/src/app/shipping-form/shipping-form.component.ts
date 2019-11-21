@@ -30,7 +30,8 @@ export class ShippingFormComponent implements OnInit {
   }
 
   onSubmit() { 
-    console.log("SUBMITTED");   
+    console.log("SUBMITTED"); 
+    this.itemService.submitBill().subscribe();  
   }
 
   private initForm() {

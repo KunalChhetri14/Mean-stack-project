@@ -28,14 +28,18 @@ app.get('/getdetails',(req,res)=>
 
 app.post('/addToCart',(req,res)=>
 {
+  console.log("testing ");
+
+  console.log(req.body);
+  res.send("cool");
   
-  MongoClient.connect(url,function(err,db){
-    var dbo=db.db("kunal_db");
+  // MongoClient.connect(url,function(err,db){
+  //   var dbo=db.db("kunal_db");
 
-    dbo.collection("CartItems").insert(req.body);
-    db.close();
+  //   dbo.collection("CartItems").insert(req.body);
+  //   db.close();
 
-  })
+  // })
 });
 
   app.get('/getAddCartItems',(req,res)=>

@@ -1,8 +1,13 @@
 
   
-     <div class="container-fluid">
-         <div style="display:grid; padding: 2px; grid-template-columns: repeat(3, 1fr);">
-          <div  *ngFor="let item of name;" >
+     <div class="container">
+        <div class="col-sm-6">
+            <p>THis is first </p>
+        </div>
+        <div class="col-sm-6">
+          <p>THis is Second </p>
+        </div>
+          <div  class="col-sm-6" *ngFor="let item of name;" >
              
             <img src="{{item.Image}}"/>
               <br>
@@ -10,11 +15,11 @@
               <br>
               <button #template  class="btn btn-success" (click)="addCar(template,item)">Add To Cart</button>
             </div>
-        </div>
+        
 
 
             
        
-          <p></p>
+          <p>This is ljlkj</p>
           <div><button>See cart</button></div>
     </div>

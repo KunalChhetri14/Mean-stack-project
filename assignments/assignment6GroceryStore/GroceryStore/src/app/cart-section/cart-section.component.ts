@@ -12,7 +12,7 @@ export class CartSectionComponent implements OnInit {
   TotalQuantity=0;
   TotalSum=0;
   dataArray=[]
-  
+    
 
   
   constructor(private itemService:GetGroceryListService,private router:Router) { }
