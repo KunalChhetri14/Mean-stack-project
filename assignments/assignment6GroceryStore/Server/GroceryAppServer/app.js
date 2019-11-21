@@ -3,6 +3,7 @@ var express=require('express');
 const bodyPar=require('body-parser');
 const app=express();
 var cors=require('cors');
+
 // const port=3000;
 var url="mongodb://127.0.0.1:27017/";
 app.use(bodyPar.urlencoded({extended : true}));
@@ -33,13 +34,13 @@ app.post('/addToCart',(req,res)=>
   console.log(req.body);
   res.send("cool");
   
-  // MongoClient.connect(url,function(err,db){
-  //   var dbo=db.db("kunal_db");
+  MongoClient.connect(url,function(err,db){
+    var dbo=db.db("kunal_db");
 
-  //   dbo.collection("CartItems").insert(req.body);
-  //   db.close();
+    dbo.collection("CartItems1").insert(req.body);
+    db.close();
 
-  // })
+  })
 });
 
   app.get('/getAddCartItems',(req,res)=>

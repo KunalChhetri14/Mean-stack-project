@@ -31,7 +31,9 @@ export class ShippingFormComponent implements OnInit {
 
   onSubmit() { 
     console.log("SUBMITTED"); 
-    this.itemService.submitBill().subscribe();  
+    console.log(this.courseForm.value.Name);
+    this.itemService.submitBill(this.courseForm.value.Name,this.courseForm.value.Address,
+      this.courseForm.value.PhoneNo,this.courseForm.value.Postal_Code,this.TotalSum).subscribe();  
   }
 
   private initForm() {
@@ -39,7 +41,7 @@ export class ShippingFormComponent implements OnInit {
       'Name': new FormControl(null, Validators.required),
       'Address': new FormControl(null),
       'PhoneNo': new FormControl(null),
-      'Postal Code': new FormControl(null)
+      'Postal_Code': new FormControl(null)
     });
   }
 

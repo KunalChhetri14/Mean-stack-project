@@ -27,6 +27,7 @@ export class GetGroceryListService {
   cartContents=[];
   NumberPropery=0;
   public total_itemsSubject=new Subject<number>();
+  Bills={};
   
   finalBillingContents=[];
   public getdata():Observable<format[]>
@@ -97,14 +98,22 @@ export class GetGroceryListService {
     return this.finalBillingContents;
   }
 
-  public submitBill():Observable<format>
+  public submitBill(name,address,phoneno,pCode,total):Observable<format>
   {
     console.log("inside submit Bill");
-    return this.http.post<format>('http://localhost:3000/addToCart',this.finalBillingContents,{
+    this.Bills['name']=name;
+    this.Bills['address']=address;
+    this.Bills['phoneno']=phoneno;
+    this.Bills['pCode']=pCode;
+    this.Bills['total']=total;
+    this.Bills['FinalBill']=this.finalBillingContents;
+
+    return this.http.post<format>('http://localhost:3000/addToCart',this.Bills,{
       headers:new HttpHeaders({
         'Content-Type':'application/json'
       })
     })
+  
     // .catch((err: HttpErrorResponse) => {
 
     //   if (err.error instanceof Error) {
