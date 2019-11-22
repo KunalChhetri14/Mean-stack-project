@@ -1,5 +1,13 @@
 <div style="display:flex; max-height: 100px; min-height: 100px;  justify-content: space-between;  padding-right: 10px;">
        <img id="logo"   src="../assets/Image/download.png"  alt="responsive">
-        <span class="glyphicon glyphicon-shopping-cart"><a routerLink="/CartDetails"><h2> {{numberItems}} Cart</h2></a></span>
+       <a routerLink="/CartDetails">
+          <span class="glyphicon glyphicon-shopping-cart">
+            Cart<span class="badge badge-light">{{numberItems}}</span>
+          </span>
+        </a>
+      
+       
+       
+       
       </div>
       <router-outlet></router-outlet>
