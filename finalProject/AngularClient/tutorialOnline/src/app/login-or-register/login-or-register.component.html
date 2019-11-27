@@ -7,12 +7,11 @@
     
     <div>
       <form [formGroup]='LoginForm'>
-          <mat-form-field class="fullWidth">
-              <input  matInput  placeholder="  Email / Username" formControlName="email">
-              <mat-icon matPrefix>mail_outline</mat-icon>
-           <mat-hint>Input the fully qualified email address</mat-hint>
-            </mat-form-field>
-
+        <mat-form-field class="fullWidth">
+          <input  matInput  placeholder="  Email / Username" formControlName="email">
+          <mat-icon matPrefix>mail_outline</mat-icon>
+       <mat-hint>Input the fully qualified email address</mat-hint>
+        </mat-form-field>
             <mat-form-field class="fullWidth">
                 <input  matInput  placeholder="  password" formControlName="password" >
                 <mat-icon matPrefix>lock</mat-icon>
@@ -29,26 +28,52 @@
     </ng-template>
 
     <div>
-      <form [formGroup]='RegForm'>
+      <form  (ngSubmit)="onRegSubmit()" [formGroup]='RegForm'>
+        <!-- <div>{{reg.value | json}} Cool</div> -->
           <mat-form-field class="fullWidth">
-              <input  matInput  placeholder="  Email / Username" formControlName="email">
+              <input  matInput  placeholder="  Email / Username" 
+              formControlName="email" >
               <mat-icon matPrefix>mail_outline</mat-icon>
+              <mat-error>
+                <span *ngIf="RegForm.controls.email.invalid">
+                  Email is required
+                </span>
+              </mat-error>
            <mat-hint>Input the fully qualified email address</mat-hint>
-            </mat-form-field>
+          </mat-form-field>
 
             <mat-form-field class="fullWidth">
-                <input  matInput  placeholder="  password" formControlName="password" >
+                <input  matInput  placeholder="  password"  
+                formControlName="password" >
                 <mat-icon matPrefix>lock</mat-icon>
+                <mat-error>
+                    <span *ngIf="RegForm.controls.password.invalid">
+                      Password must be of min 8 and max 20 and should contain atleast
+                      one lowercase, uppercase , digits and special symbols
+                      such as @#$%
+                    </span>
+                </mat-error>
              <mat-hint>Enter the password</mat-hint>
             </mat-form-field>
 
             <mat-form-field class="fullWidth">
-                <input  matInput  placeholder="  Confirm password" formControlName="confirmPassword">
+                <input   matInput 
+                appConfirmValidator="password"
+                placeholder="  Confirm password" 
+                formControlName="confirmPassword">
                 <mat-icon matPrefix>lock</mat-icon>
+                <mat-error>
+                    <span *ngIf="RegForm.controls.confirmPassword.invalid">
+                        Password and confirmPassword doesn't match
+                      </span>
+                </mat-error>
+                
              <mat-hint>Confirm the password</mat-hint>
+             
             </mat-form-field>
+            
 
-            <button type="text" mat-raised-button color="primary">LOGIN</button>
+            <button type="submit" mat-raised-button color="primary">REGISTER</button>
     </form>
     </div>
   </mat-tab>
