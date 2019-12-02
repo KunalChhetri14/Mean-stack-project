@@ -23,7 +23,7 @@ export class ServiceTutorialOnlineService {
   regSubmittedData = {};
   constructor(private http: HttpClient) {}
 
-  public acceptRegDetails(details): Observable<any> {
+  public SignUp(details): Observable<any> {
     // this.regSubmittedData = details;
     this.regSubmittedData['email']=details.email;
     this.regSubmittedData['password']=details.password;
@@ -32,7 +32,7 @@ export class ServiceTutorialOnlineService {
     
 
     return this.http
-      .post<any>('http://localhost:3000/regData', this.regSubmittedData)
+      .post<any>('http://localhost:3000/SignUp', this.regSubmittedData)
       .pipe(catchError(this.errHandler));
   }
   public errHandler(err: HttpErrorResponse) {

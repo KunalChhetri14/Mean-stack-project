@@ -32,10 +32,8 @@ app.use(express.json());
       .toArray(function(err,data){
 
         if(data){
-          console.log("Element is")
-          this.data=data;
-        resolve(this.data);
-        console.log("inside data after resolve");
+        resolve(data);
+        
         }
         if(err){
           console.log("error inside toArray");
@@ -53,7 +51,7 @@ app.use(express.json());
 
 }
 // 
-app.post('/regData',(req,res)=>
+app.post('/SignUp',(req,res)=>
 {
   var jsonObj=req.body['email'];
   getMail(jsonObj).then(function(data){

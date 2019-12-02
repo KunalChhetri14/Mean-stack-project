@@ -56,7 +56,7 @@ export class LoginOrRegisterComponent implements OnInit {
       if (this.RegForm.valid) {
         console.log('Reg forms valid');
         console.log(this.RegForm.value);
-        this._service.acceptRegDetails(this.RegForm.value).subscribe(
+        this._service.SignUp(this.RegForm.value).subscribe(
           data => {
             console.log('Success: ', data)
             this._snackbar.open(`
