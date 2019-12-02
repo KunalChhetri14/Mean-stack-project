@@ -52,6 +52,7 @@ app.use(express.json());
 }
 
 app.post('/Login',(req,res)=>{
+  
   //check whether the email is linked with current registered mails
   getMail(req.body['email']).then(function(data){
     if(data.length===0){
@@ -62,16 +63,60 @@ app.post('/Login',(req,res)=>{
     }
     else{
       //Check for credentials and if true Redirect to Homepage
-      //if credentials doesn't match
-      return res.status(400).send({
-        message: 'PasswordIncorrect'
+      let verifyPassword=new Promise(function(resolve,reject){
+        MongoClient.connect(url,function(err,db){
+        if(err){
+          console.log("Mongodb client not connected");
+          return res.status(502).send({
+            message: "there is database side error"
+          })
+        }
+        else{
+        var dbo=db.db("Tutorial_Online");
+         
+        totalcount=  dbo.collection("Users_Credentials")
+        .find({email:req.body['email'],password:req.body['password']})
+        .toArray(function(err,data){
+          if(data){
+            console.log("Succesful login")
+          resolve(data);
+          }
+          if(err){
+            console.log("error inside toArray");
+          }
+          
+        });
+       
+         db.close();
+        }
+    })
+  });
+    verifyPassword.then(data=>{
+      if(data.length>0){
+        console.log("before returning");
+        return res.send(data);
+        // return res.status(100).send({
+        //   message:'Login Successful'
+        // })
+      }
+      else{
+        console.log("length is equal to 0")
+        //if credentials doesn't match
+        return res.status(400).send({
+          message: 'PasswordIncorrect'
+        })
+      }
+
+    }).catch(err=>{
+      return res.status(502).send({
+        message: "there is database side error"
       })
-      //Code for succesful registration ... 
-      //Code to check password will be updated afterwards
-      console.log("redirect to homepage");
-      return res.status(100).send({
-        message: 'Login succesful'
-      })
+    })
+    
+
+      
+     
+    
     }
   }).catch(err=>{
     return res.status(502).send({
