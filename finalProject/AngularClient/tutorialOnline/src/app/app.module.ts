@@ -3,22 +3,14 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {AngularMaterialModule} from './angular-material/angular-material.module';
+import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { LoginOrRegisterComponent } from './login-or-register/login-or-register.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { ConfirmPasswordValidator} from './Shared/Confirm-equalvalidator.directive';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginOrRegisterComponent,
-    
-  ],
+  declarations: [AppComponent, LoginOrRegisterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -26,14 +18,9 @@ import { ConfirmPasswordValidator} from './Shared/Confirm-equalvalidator.directi
     AngularMaterialModule,
     ReactiveFormsModule,
     LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule
-    
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
