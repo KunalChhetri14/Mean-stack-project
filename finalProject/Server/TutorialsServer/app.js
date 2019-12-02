@@ -50,7 +50,36 @@ app.use(express.json());
 
 
 }
-// 
+
+app.post('/Login',(req,res)=>{
+  //check whether the email is linked with current registered mails
+  getMail(req.body['email']).then(function(data){
+    if(data.length===0){
+      console.log("Email id doesn't exist");
+      return res.status(400).send({
+        message: 'No EmailId linked'
+      })
+    }
+    else{
+      //Check for credentials and if true Redirect to Homepage
+      //if credentials doesn't match
+      return res.status(400).send({
+        message: 'PasswordIncorrect'
+      })
+      //Code for succesful registration ... 
+      //Code to check password will be updated afterwards
+      console.log("redirect to homepage");
+      return res.status(100).send({
+        message: 'Login succesful'
+      })
+    }
+  }).catch(err=>{
+    return res.status(502).send({
+      message: "there is database side error"
+    })
+  })
+})
+// Sign Up for Registration
 app.post('/SignUp',(req,res)=>
 {
   var jsonObj=req.body['email'];
@@ -59,12 +88,6 @@ app.post('/SignUp',(req,res)=>
     console.log("data is ",data);
     console.log("Length is " ,data.length);
     if(data.length>0){
-      // console.log("Email id already exist");
-      // let a={};
-      // a['key']=1;
-      // return res.send(a)
-      //console.log("Length is greater than 0");
-      
       return res.status(400).send({
         message: 'This is an error!'
      });

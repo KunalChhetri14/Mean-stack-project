@@ -21,7 +21,19 @@ interface format{
 
 export class ServiceTutorialOnlineService {
   regSubmittedData = {};
+  loginData={};
   constructor(private http: HttpClient) {}
+
+  public Login(loginDetails):Observable<any>{
+    this.loginData['email']=loginDetails.email;
+    this.loginData['password']=loginDetails.password;
+    return this.http
+      .post<any>('http://localhost:3000/Login',this.loginData)
+      .pipe(catchError((err)=>{
+        console.log("Error in login service");
+        return throwError(err);
+      }))
+  }
 
   public SignUp(details): Observable<any> {
     // this.regSubmittedData = details;

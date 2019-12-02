@@ -47,6 +47,57 @@ export class LoginOrRegisterComponent implements OnInit {
 
   ngOnInit() {}
 
+  onLoginSubmit(){
+    this.LoginForm.touched;
+    if(this.LoginForm.valid){
+    this._service.Login(this.LoginForm.value).subscribe(data=>{
+
+    },
+    err=>{
+      console.log("the error status is ",err);
+      if(err.status==400){
+        if(err.error.message==="No EmailId linked")
+        {
+          this.LoginForm.controls.email.setErrors({
+            notExist: true
+          });
+          this._snackbar.open(`
+          Login unsuccessful:Reenter email id.
+        `)
+        }
+        else if(err.error.message==="PasswordIncorrect"){
+          this.LoginForm.controls.password.setErrors({
+            PasswordIncorrect:true
+          });
+          this._snackbar.open(`Login unsuccessful: Password doesn't match`);
+        }
+        else{
+          this._snackbar.open(`Unknown Error`);
+        }
+        
+    }
+    else if(err.status===502){
+      console.log("error 502 ",err.error.message);
+              if(err.error.message==="there is database side error"){
+                this._snackbar.open(`
+                Registration unsuccessful:Database connection error
+                `)
+              console.log("There is database error",err);
+              }
+              else if(err.error.message==="Error while inserting data"){
+                this._snackbar.open(`Registration unsuccessful:Error while inserting data`);
+                console.log("Connected to database, error while inserting data in database")
+              }
+              else{
+                console.log("There is unknown error 502 ",err);
+              }
+
+    }
+  })
+}
+}
+  
+
   onRegSubmit() {
     this.RegForm.touched;
     if (this.RegForm.valid) {
@@ -113,9 +164,6 @@ export class LoginOrRegisterComponent implements OnInit {
     this._snackbar.dismiss();
   }
 
-  onLoginSubmit() {
-    this.LoginForm.touched;
-  }
 
   
 }

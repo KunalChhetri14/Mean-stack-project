@@ -6,15 +6,31 @@
     </ng-template>
     
     <div>
-      <form [formGroup]='LoginForm'>
+      <form [formGroup]='LoginForm' (ngSubmit)="onLoginSubmit()" (click)="closeSnackbar()">
         <mat-form-field class="fullWidth">
           <input  matInput  placeholder="  Email / Username" formControlName="email">
           <mat-icon matPrefix>mail_outline</mat-icon>
+        <mat-error> 
+          <span *ngIf="LoginForm.controls.email.hasError('notExist')">
+          Email id is not linked with any account
+          </span>
+          <span *ngIf="LoginForm.controls.email.hasError('required')">
+            Email id is required
+          </span>
+        </mat-error>
        <mat-hint>Input the fully qualified email address</mat-hint>
         </mat-form-field>
             <mat-form-field class="fullWidth">
                 <input  matInput  placeholder="  password" formControlName="password" >
                 <mat-icon matPrefix>lock</mat-icon>
+              <mat-error>
+                  <span *ngIf="LoginForm.controls.password.hasError('required')">
+                      Password is required
+                    </span>
+                    <span *ngIf="LoginForm.controls.password.hasError('PasswordIncorrect')">
+                        Password is incorrect
+                      </span>
+              </mat-error>
              <mat-hint>Enter the password</mat-hint>
             </mat-form-field>
 
