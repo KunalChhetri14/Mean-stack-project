@@ -116,6 +116,9 @@ app.post('/Login', (req, res) => {
       });
     });
 });
+
+
+
 // Sign Up for Registration
 app.post('/SignUp', (req, res) => {
   var jsonObj = req.body['email'];
@@ -190,6 +193,35 @@ app.get('/getAllCourses',(req,res)=>{
     }
   });
 
+})
+
+app.post('/getSubTopics',(req,res)=>{
+  console.log("Inside get");
+  MongoClient.connect(url,function(err,db){
+    //if error ...respond with error code
+    if(err){
+      res.status(502).send({
+        message: 'there is database side error'
+      })
+    }
+    //No error ...proceed
+    else{
+      let courseName=req.body['courseName'];
+      console.log("The course name is ",courseName);
+      var dbo=db.db('course_db');
+      let k = dbo.collection('course').find({"Details.course":courseName},{"Details.Topics.subTopic":1}).toArray();
+      db.close();
+      k.then(data=>{
+          res.send(data);
+          console.log("The data is ",data);
+      })
+      .catch(err=>{
+        res.status(502).send({
+          message: 'there is database side error'
+        });
+      });
+    }
+  })
 })
 
 app.get('/', (req, res) => {

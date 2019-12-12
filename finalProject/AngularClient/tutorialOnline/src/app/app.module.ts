@@ -8,9 +8,16 @@ import { LoginOrRegisterComponent } from './login-or-register/login-or-register.
 import { ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
+import { CourseComponentComponent } from './course-component/course-component.component';
+import { CourseSideTopicComponent } from './course-side-topic/course-side-topic.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginOrRegisterComponent],
+  declarations: [
+    AppComponent,
+    LoginOrRegisterComponent,
+    CourseComponentComponent,
+    CourseSideTopicComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

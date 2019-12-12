@@ -19,6 +19,7 @@ interface format {
 export class ServiceTutorialOnlineService {
   regSubmittedData = {};
   loginData = {};
+  submittedCourse={};
   constructor(private http: HttpClient) {}
 
   public Login(loginDetails): Observable<any> {
@@ -48,5 +49,22 @@ export class ServiceTutorialOnlineService {
   public errHandler(err: HttpErrorResponse) {
     console.log('Error handler in service');
     return throwError(err);
+  }
+
+
+  //Getting the course details
+  public getAllCourses():Observable<any>{
+    return this.http
+      .get<any>('http://localhost:3000/getAllCourses')
+      .pipe(catchError(this.errHandler));
+  }
+
+  //Getting the subtopics for Course-side-topic components
+  public getSubTopics(selected_Course):Observable<any>{
+    console.log("Inside service of getSubtopics ",selected_Course);
+    this.submittedCourse['courseName'] = selected_Course;
+    return this.http
+    .post<any>('http://localhost:3000/getSubTopics',this.submittedCourse)
+    .pipe(catchError(this.errHandler));
   }
 }
