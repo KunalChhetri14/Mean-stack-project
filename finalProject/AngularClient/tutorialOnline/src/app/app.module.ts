@@ -10,13 +10,17 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
 import { CourseComponentComponent } from './course-component/course-component.component';
 import { CourseSideTopicComponent } from './course-side-topic/course-side-topic.component';
+import { MainContentPageComponent } from './main-content-page/main-content-page.component';
+import { PageNotFoundComponentComponent } from './page-not-found-component/page-not-found-component.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginOrRegisterComponent,
     CourseComponentComponent,
-    CourseSideTopicComponent
+    CourseSideTopicComponent,
+    MainContentPageComponent,
+    PageNotFoundComponentComponent
   ],
   imports: [
     BrowserModule,

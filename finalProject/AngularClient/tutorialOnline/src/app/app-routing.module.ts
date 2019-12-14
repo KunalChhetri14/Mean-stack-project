@@ -3,9 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginOrRegisterComponent } from './login-or-register/login-or-register.component';
 import { CourseComponentComponent } from './course-component/course-component.component';
 import { CourseSideTopicComponent } from './course-side-topic/course-side-topic.component';
+import { PageNotFoundComponentComponent } from './page-not-found-component/page-not-found-component.component';
 
 const routes: Routes = [
- 
+  {
+    path:'',redirectTo:'/ViewCourses',pathMatch:'full'
+  },
   {
     path:'ViewCourses',
     component: CourseComponentComponent
@@ -17,6 +20,10 @@ const routes: Routes = [
   {
     path: '',
     component: LoginOrRegisterComponent
+  },
+  {
+    path:'**',
+    component: PageNotFoundComponentComponent
   }
 ];
 
