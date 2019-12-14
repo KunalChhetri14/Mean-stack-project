@@ -21,7 +21,7 @@ class linkedList{
             current=NULL;
         }
     void addNode(int element){
-        node *temp=(struct node*)malloc(sizeof(struct node));
+        node *temp=new node;
         temp->data=element;
         temp->next=NULL;
         if(head==NULL){
@@ -55,7 +55,7 @@ class linkedList{
     void rev(struct node *temp){
         if(temp!=NULL){
             rev(temp->next);
-            cout<<"Reversed Elements is "<<temp->data<<"\n";
+            cout<<"Elements is "<<temp->data<<"\n";
         }
     }
 
