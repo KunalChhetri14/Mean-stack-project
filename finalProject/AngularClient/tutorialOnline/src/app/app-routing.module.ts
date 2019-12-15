@@ -14,7 +14,7 @@ const routes: Routes = [
     component: CourseComponentComponent
   },
   {
-    path:'course/:Kunal',
+    path:'ViewCourses/:CourseName',
     component:CourseSideTopicComponent
   },
   {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceTutorialOnlineService } from '../service-tutorial-online.service';
-
+import {ActivatedRoute, Router, ParamMap, convertToParamMap} from '@angular/router'
 @Component({
   selector: 'app-course-side-topic',
   templateUrl: './course-side-topic.component.html',
@@ -8,18 +8,25 @@ import { ServiceTutorialOnlineService } from '../service-tutorial-online.service
 })
 export class CourseSideTopicComponent implements OnInit {
 
-  constructor(private _service:ServiceTutorialOnlineService) { }
+  constructor(private _service:ServiceTutorialOnlineService,
+    private _actRoute:ActivatedRoute) { }
   courseSubTopics=[];
   subTopicsContent=[];
   topics=[];
+  course:string;
   ngOnInit() {
     
-    let url=window.location.href.split("/");
-    let course=decodeURIComponent(url[url.length-1]);
-    console.log("The course name is ",course);
+    // let url=window.location.href.split("/");
+    // let course=decodeURIComponent(url[url.length-1]);
+    
+    this._actRoute.paramMap.subscribe((params:ParamMap)=>{
+       this.course=params.get('CourseName');
+    })
+    
+    console.log("The course name is ",this.course);
     // let jsonObject={"courseName":course}
     
-    this._service.getSubTopics(course).subscribe(data=>{
+    this._service.getSubTopics(this.course).subscribe(data=>{
       //this.subTopicsContent=data.Details.Topics;
       console.log("The sub topics arr are : ",data);
       

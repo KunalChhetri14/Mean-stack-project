@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceTutorialOnlineService } from '../service-tutorial-online.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-course-component',
@@ -11,7 +11,8 @@ export class CourseComponentComponent implements OnInit {
   courseArr=[];
   courseName:string="";
   courseUrl="course/";
-  constructor(private _service:ServiceTutorialOnlineService,private _router:Router) {}
+  constructor(private _service:ServiceTutorialOnlineService,
+    private _router:Router,private _route:ActivatedRoute) {}
   ngOnInit() {
     this._service.getAllCourses().subscribe(data=>{
         this.courseArr=data;
@@ -27,9 +28,7 @@ export class CourseComponentComponent implements OnInit {
 
   showContent(courseDetails){
     this.courseName=courseDetails.Details.course;
-    this.courseUrl=this.courseUrl+this.courseName;
-    console.log("url is ",this.courseUrl);
-    this._router.navigate([this.courseUrl]);
+    this._router.navigate([this.courseName],{relativeTo:this._route});
     
     
     
