@@ -224,6 +224,40 @@ app.post('/getSubTopics',(req,res)=>{
   })
 })
 
+
+app.post('/getsubTopicsDetails',(req,res)=>{
+    MongoClient.connect(url,function(err,db){
+      if(err){
+        res.status(502).send({
+          message: 'there is database side error'
+        })
+      }
+
+      else{
+        let subTopicName=req.body['subTopicName'];
+        let course=req.body['courseName'];
+        console.log("The course name is ",subTopicName);
+        var dbo=db.db('course_db');
+        let k = dbo.collection('course').find({$and:[{"Details.Topics.subTopic":subTopicName},
+        {"Details.course":course}]},{"Details.Topics":1}).toArray();
+        db.close();
+        k.then(data=>{
+            
+            console.log("The data is ",data);
+            return res.send(data);
+        })
+        .catch(err=>{
+          res.status(502).send({
+            message: 'there is database side error'
+          });
+        });
+      }
+
+    })
+})
+
+
+
 app.get('/', (req, res) => {
   res.send('welcome to the default server apge');
 });

@@ -12,6 +12,7 @@ import { CourseComponentComponent } from './course-component/course-component.co
 import { CourseSideTopicComponent } from './course-side-topic/course-side-topic.component';
 import { MainContentPageComponent } from './main-content-page/main-content-page.component';
 import { PageNotFoundComponentComponent } from './page-not-found-component/page-not-found-component.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PageNotFoundComponentComponent } from './page-not-found-component/page-
     AngularMaterialModule,
     ReactiveFormsModule,
     LayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

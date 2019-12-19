@@ -4,18 +4,25 @@ import { LoginOrRegisterComponent } from './login-or-register/login-or-register.
 import { CourseComponentComponent } from './course-component/course-component.component';
 import { CourseSideTopicComponent } from './course-side-topic/course-side-topic.component';
 import { PageNotFoundComponentComponent } from './page-not-found-component/page-not-found-component.component';
+import { MainContentPageComponent } from './main-content-page/main-content-page.component';
 
 const routes: Routes = [
-  {
-    path:'',redirectTo:'/ViewCourses',pathMatch:'full'
-  },
+  // {
+  //   path:'',redirectTo:'/ViewCourses',pathMatch:'full'
+  // },
   {
     path:'ViewCourses',
     component: CourseComponentComponent
   },
   {
     path:'ViewCourses/:CourseName',
-    component:CourseSideTopicComponent
+    component:CourseSideTopicComponent,
+    children:[
+      {
+        path:':Main',
+        component:MainContentPageComponent  
+      }
+    ]
   },
   {
     path: '',
