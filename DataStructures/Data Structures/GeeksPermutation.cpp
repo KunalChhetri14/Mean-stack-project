@@ -11,15 +11,17 @@ using namespace std;
 // 3. Ending index of the string.  
 void permute(string a, int l, int r)  
 {  
+     cout<<"for l is "<<l<<" "<<"and r is : "<<r<<" "<<a.substr(0,l)<<endl;
     // Base case  
     if (l == r)  
-        cout<<a<<endl;  
+        cout<<"inside l and r equal"<<a<<endl;  
     else
     {  
         // Permutations made  
         for (int i = l; i <= r; i++)  
         {  
-  
+            
+           
             // Swapping done  
             swap(a[l], a[i]);  
   
@@ -27,7 +29,7 @@ void permute(string a, int l, int r)
             permute(a, l+1, r);  
   
             //backtrack  
-            swap(a[l], a[i]);  
+            // swap(a[l], a[i]);  
         }  
     }  
 }  
@@ -36,6 +38,7 @@ void permute(string a, int l, int r)
 int main()  
 {  
     string str = "ABC";  
+    cout<<"The substring is "<<str.substr(0,1)<<endl;
     int n = str.size();  
     permute(str, 0, n-1);  
     return 0;  

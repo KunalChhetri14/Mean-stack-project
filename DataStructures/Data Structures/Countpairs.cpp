@@ -29,7 +29,7 @@ int main(){
    int totalPair=findPair(v1);
     cout<<"The total pair is "<<totalPair;
 
-    unordered_map<
+    
 
    
 

@@ -1,5 +1,7 @@
 #include<iostream>
+
 #include <bits/stdc++.h> 
+
 using namespace std;
 vector<int> arr;
 bool firstLast=true;
@@ -25,7 +27,16 @@ void Delete(int i,int length){
     l=length;
     if(i==0){
             cout<<"\n The length is : "<<length;    
-            swap(arr[i],arr[length]);
+            
+            if(l==1){
+                cout<<"\n The deleted element is "<<arr[l]<<"\n";
+                cout<<"Elements before swap in 1st and 2nd is : "<<arr[0]<<" "<<arr[1];
+                 swap(arr[i],arr[length]);
+                 cout<<"\n Elements after swap in 1st and 2nd is : "<<arr[0]<<" "<<arr[1];
+            }
+            else{
+                swap(arr[i],arr[length]);
+            }
         
         cout<<"\n last element is "<<arr[length];
         l=l-1;
@@ -40,7 +51,7 @@ void Delete(int i,int length){
     
     int right=i*2+2;
     cout<<"\n LEft and right index is "<<left<<" "<<right;
-    if((left<l) && (right<l)){
+    if((left<=l) && (right<=l)){
         if(arr[left]>arr[right]){
             if(arr[left]>arr[i]){
                 swap(arr[left],arr[i]);
@@ -56,8 +67,11 @@ void Delete(int i,int length){
             }
         }
     }
-    else if(left<l){
-        swap(arr[i],arr[left]);
+    else if(left<=l){
+        if(arr[left]>arr[i])
+            {
+                swap(arr[i],arr[left]);
+            }
         cout<<"\n Only left node was there \n ";
     }
 }
@@ -97,6 +111,10 @@ int main(){
             cout<< "\n  Coo  "<<arr[len-1]<<" "<<arr[len-2]<<" "<< arr[len-3] << " \n";
         }
         cout<< " after sorting "<< arr[len-i-1];
+        cout<<"\n\n \n Sorted elements are :  ";
+        for(int i=0;i<len;i++){
+         cout<<" "<<arr.at(i);
+    }
     }
 
     cout<<"\n Sorted elements are :  ";
