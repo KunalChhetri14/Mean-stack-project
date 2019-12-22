@@ -9,6 +9,7 @@ import { passwordValidator, confirmPassValidator } from './customValidator';
 import { ServiceTutorialOnlineService } from '../service-tutorial-online.service';
 import { MatSnackBar } from '@angular/material';
 import { Action } from 'rxjs/internal/scheduler/Action';
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-login-or-register',
   templateUrl: './login-or-register.component.html',
@@ -21,7 +22,9 @@ export class LoginOrRegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _service: ServiceTutorialOnlineService,
-    private _snackbar: MatSnackBar
+    private _snackbar: MatSnackBar,
+    private _router:Router,
+    private _route:ActivatedRoute
   ) {
     this.RegForm = this.fb.group({
       email: [
@@ -52,9 +55,10 @@ export class LoginOrRegisterComponent implements OnInit {
     if (this.LoginForm.valid) {
       this._service.Login(this.LoginForm.value).subscribe(
         data => {
-          this._snackbar.open(`
-        LOGIN SUCCESSFUL
-    `);
+    //       this._snackbar.open(`
+    //     LOGIN SUCCESSFUL
+    // `);
+    this._router.navigate(["ViewCourses"],{relativeTo:this._route});
         },
         err => {
           console.log('the error status is ', err);
@@ -92,6 +96,10 @@ export class LoginOrRegisterComponent implements OnInit {
               console.log('There is unknown error 502 ', err);
             }
           }
+          else{
+            console.log("Server not connected");
+            this._snackbar.open('Server not connected');
+          }
         }
       );
     }
@@ -114,7 +122,7 @@ export class LoginOrRegisterComponent implements OnInit {
           `);
           },
           err => {
-            console.log('the error status is ', err.status);
+            console.log('the error status in Reg is ', err.status);
             if (err.status == 400) {
               this.RegForm.controls.email.setErrors({
                 notUnique: true
