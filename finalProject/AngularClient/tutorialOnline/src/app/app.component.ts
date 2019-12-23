@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,15 +9,13 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'tutorialOnline';
   urlMatch;
-  talk="";
-  AppComponent(_router:Router){
-      
-  }
+  talk = '';
+  AppComponent(_router: Router) {}
 
-  ngOnInit(){
-    this.talk="Hey angular!";
-    this.urlMatch=window.location.href.includes('course');
+  ngOnInit() {
+    this.talk = 'Hey angular!';
+    this.urlMatch = window.location.href.includes('course');
     console.log(this.urlMatch);
-    console.log("sdjflsdjfjsdfj");
+    console.log('sdjflsdjfjsdfj');
   }
 }

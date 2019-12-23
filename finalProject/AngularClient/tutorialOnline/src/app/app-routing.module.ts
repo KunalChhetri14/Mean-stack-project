@@ -11,16 +11,16 @@ const routes: Routes = [
   //   path:'',redirectTo:'/ViewCourses',pathMatch:'full'
   // },
   {
-    path:'ViewCourses',
+    path: 'ViewCourses',
     component: CourseComponentComponent
   },
   {
-    path:'ViewCourses/:CourseName',
-    component:CourseSideTopicComponent,
-    children:[
+    path: 'ViewCourses/:CourseName',
+    component: CourseSideTopicComponent,
+    children: [
       {
-        path:':Main',
-        component:MainContentPageComponent  
+        path: ':Main',
+        component: MainContentPageComponent
       }
     ]
   },
@@ -29,7 +29,7 @@ const routes: Routes = [
     component: LoginOrRegisterComponent
   },
   {
-    path:'**',
+    path: '**',
     component: PageNotFoundComponentComponent
   }
 ];
