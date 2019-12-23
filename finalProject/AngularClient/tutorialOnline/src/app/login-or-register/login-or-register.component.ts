@@ -58,6 +58,8 @@ export class LoginOrRegisterComponent implements OnInit {
     //       this._snackbar.open(`
     //     LOGIN SUCCESSFUL
     // `);
+    console.log("the token is ",data.token)
+    localStorage.setItem('token',data.token);
     this._router.navigate(["ViewCourses"],{relativeTo:this._route});
         },
         err => {
@@ -116,10 +118,15 @@ export class LoginOrRegisterComponent implements OnInit {
         console.log(this.RegForm.value);
         this._service.SignUp(this.RegForm.value).subscribe(
           data => {
-            console.log('Success: ', data);
-            this._snackbar.open(`
-            Registration Successful:Try logging!
-          `);
+            // console.log('Success: ', data);
+          //   this._snackbar.open(`
+          //   Registration Successful:Try logging!
+          // `);
+          console.log("the token is ",data.token)
+          
+
+          //Storing in localStorage for authetication
+          localStorage.setItem('token',data.token);
           },
           err => {
             console.log('the error status in Reg is ', err.status);
