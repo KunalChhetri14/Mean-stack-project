@@ -2,6 +2,25 @@ var MongoClient = require('mongodb').MongoClient;
 var express = require('express');
 const bodyPar = require('body-parser');
 const app = express();
+const jwt=require('jsonwebtoken');
+const mongoose=require('mongoose');
+const db="mongodb+srv://Kunal:mongodb123@clustertutorialspoint-o34i7.mongodb.net/test?retryWrites=true&w=majority"
+
+
+const client = new MongoClient(db, { useNewUrlParser: true });
+client.connect(err => {
+  if(err){
+    console.log("there is error in connection");
+  }
+
+  else{
+    console.log("database connected");
+  }
+  //const collection = client.db("test").collection("devices");
+  //perform actions on the collection object
+  
+});
+
 var cors = require('cors');
 
 // const port=3000;
@@ -87,11 +106,17 @@ app.post('/Login', (req, res) => {
             }
           });
         });
+
+        //Resolving promise which resolves true on credentials match
         verifyPassword
           .then(data => {
             if (data.length > 0) {
               console.log('before returning');
-              return res.send(data);
+              let document_id=data[0]._id;
+              let payload={subject:document_id};
+              let token=jwt.sign(payload,'SecretKey');
+
+              return res.status(201).send({token});
               // return res.status(100).send({
               //   message:'Login Successful'
               // })
@@ -128,7 +153,7 @@ app.post('/SignUp', (req, res) => {
       console.log('Length is ', data.length);
       if (data.length > 0) {
         return res.status(400).send({
-          message: 'This is an error!'
+          message: 'Email Id already exists!'
         });
       } else {
         MongoClient.connect(url, function(err, db) {
@@ -140,18 +165,28 @@ app.post('/SignUp', (req, res) => {
             var dbo = db.db('Tutorial_Online');
             console.log('Data is ');
             let k = dbo.collection('Users_Credentials').insert(req.body);
-            db.close();
+              db.close();
+            
+            
 
-            k.then(function(insertedData) {
+            k.then(insertedData=> {
               console.log('New email id inserted');
               console.log('Credentials entered is ', insertedData);
-              return res.send(req.body['email']);
+              let regId=insertedData.ops[0]._id;
+              console.log("Reg Id is \n ",regId);
+              let payload={subject:regId}
+              let token=jwt.sign(payload,'SecretKey');
+              return res.status(201).send({token});
+              //  res.send(req.body['email']);
             }).catch(err => {
-              res.status(502).send({
+              console.log("The error is ",err);
+              console.log("Kunallk");
+              return res.status(400).send({
                 message: 'Error while inserting data'
               });
+             
             });
-            return res.send(data);
+            //return res.send(data);
           }
         });
       }
