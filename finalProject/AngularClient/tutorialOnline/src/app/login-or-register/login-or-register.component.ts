@@ -60,7 +60,8 @@ export class LoginOrRegisterComponent implements OnInit {
           // `);
           console.log('the token is ', data.token);
           localStorage.setItem('token', data.token);
-          this._router.navigate(['ViewCourses'], { relativeTo: this._route });
+          this._router.navigateByUrl('/ViewCourses');
+          // this._router.navigate(['ViewCourses'], { relativeTo: this._route });
         },
         err => {
           console.log('the error status is ', err);

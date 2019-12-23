@@ -13,6 +13,8 @@ import { CourseSideTopicComponent } from './course-side-topic/course-side-topic.
 import { MainContentPageComponent } from './main-content-page/main-content-page.component';
 import { PageNotFoundComponentComponent } from './page-not-found-component/page-not-found-component.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AuthGuard } from './auth.guard';
+import { ServiceTutorialOnlineService } from './service-tutorial-online.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HttpClientModule,
     FlexLayoutModule
   ],
-  providers: [],
+  providers: [ServiceTutorialOnlineService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

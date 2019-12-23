@@ -66,4 +66,9 @@ export class ServiceTutorialOnlineService {
       .post<any>('http://localhost:3000/getSubTopics', this.submittedCourse)
       .pipe(catchError(this.errHandler));
   }
+
+  //Checking whether logged in or not
+  loginedIn() {
+    return !!localStorage.getItem('token');
+  }
 }
