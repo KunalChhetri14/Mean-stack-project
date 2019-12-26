@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 interface format {
   email: string;
@@ -20,7 +21,11 @@ export class ServiceTutorialOnlineService {
   regSubmittedData = {};
   loginData = {};
   submittedCourse = {};
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private _router:Router) {}
+
+
+  //Defining subject for LogOut Button
+
 
   public Login(loginDetails): Observable<any> {
     this.loginData['email'] = loginDetails.email;
@@ -70,5 +75,10 @@ export class ServiceTutorialOnlineService {
   //Checking whether logged in or not
   loginedIn() {
     return !!localStorage.getItem('token');
+  }
+
+  LogOutUser(){
+    localStorage.removeItem('token');
+    this._router.navigateByUrl('/login')
   }
 }

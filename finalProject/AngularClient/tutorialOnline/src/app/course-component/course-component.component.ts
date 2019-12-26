@@ -30,7 +30,7 @@ export class CourseComponentComponent implements OnInit {
 
   showContent(courseDetails) {
     this.courseName = courseDetails.Details.course;
-    this._router.navigate([this.courseName, 'MainPage'], {
+    this._router.navigate([this.courseName, ''], {
       relativeTo: this._route
     });
   }

@@ -8,11 +8,12 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class MainContentPageComponent implements OnInit {
   constructor(private _actRoute: ActivatedRoute) {}
-
+  
+  course="";
   ngOnInit() {
     this._actRoute.paramMap.subscribe((params: ParamMap) => {
-      let course = params.get('Main');
-      console.log('THe link is ', course);
+      this.course = params.get('Main');
+      console.log('THe link is ', this.course);
     });
   }
 }
