@@ -2,29 +2,32 @@ var MongoClient = require('mongodb').MongoClient;
 var express = require('express');
 const bodyPar = require('body-parser');
 const app = express();
-const jwt=require('jsonwebtoken');
-const mongoose=require('mongoose');
-const db="mongodb+srv://Kunal:mongodb123@clustertutorialspoint-o34i7.mongodb.net/test?retryWrites=true&w=majority"
+const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
+const url =
+  'mongodb+srv://Kunal:mongodb123@clustertutorialspoint-o34i7.mongodb.net/test?retryWrites=true&w=majority';
 
-
-const client = new MongoClient(db, { useNewUrlParser: true });
-client.connect(err => {
-  if(err){
-    console.log("there is error in connection");
-  }
-
-  else{
-    console.log("database connected");
-  }
-  //const collection = client.db("test").collection("devices");
-  //perform actions on the collection object
-  
-});
+// const client = new MongoClient(url, { useNewUrlParser: true });
+// obj={"email":"kunalchhetri14@gmail.com","password":"Kunal@123"};
+// collection="MynewCOllection";
+// client.connect((err,db) => {
+//   if (err) {
+//     console.log('there is error in connection');
+//   } else {
+//     console.log('database connected');
+//     var dbo = db.db('Tutorial_Online');
+//             console.log('Data is ');
+//             let k = dbo.collection(collection).insert(obj);
+//             db.close();
+//   }
+//   //const collection = client.db("test").collection("devices");
+//   //perform actions on the collection object
+// });
 
 var cors = require('cors');
 
 // const port=3000;
-var url = 'mongodb://127.0.0.1:27017/';
+var db1 = 'mongodb://127.0.0.1:27017/';
 app.use(bodyPar.urlencoded({ extended: true }));
 app.use(cors());
 let arr = [];
@@ -112,11 +115,11 @@ app.post('/Login', (req, res) => {
           .then(data => {
             if (data.length > 0) {
               console.log('before returning');
-              let document_id=data[0]._id;
-              let payload={subject:document_id};
-              let token=jwt.sign(payload,'SecretKey');
+              let document_id = data[0]._id;
+              let payload = { subject: document_id };
+              let token = jwt.sign(payload, 'SecretKey');
 
-              return res.status(201).send({token});
+              return res.status(201).send({ token });
               // return res.status(100).send({
               //   message:'Login Successful'
               // })
@@ -142,8 +145,6 @@ app.post('/Login', (req, res) => {
     });
 });
 
-
-
 // Sign Up for Registration
 app.post('/SignUp', (req, res) => {
   var jsonObj = req.body['email'];
@@ -165,44 +166,40 @@ app.post('/SignUp', (req, res) => {
             var dbo = db.db('Tutorial_Online');
             console.log('Data is ');
             let k = dbo.collection('Users_Credentials').insert(req.body);
-              db.close();
-            
-            
+            db.close();
 
-            k.then(insertedData=> {
+            k.then(insertedData => {
               console.log('New email id inserted');
               console.log('Credentials entered is ', insertedData);
-              let regId=insertedData.ops[0]._id;
-              console.log("Reg Id is \n ",regId);
-              let payload={subject:regId}
-              let token=jwt.sign(payload,'SecretKey');
-              return res.status(201).send({token});
+              let regId = insertedData.ops[0]._id;
+              console.log('Reg Id is \n ', regId);
+              let payload = { subject: regId };
+              let token = jwt.sign(payload, 'SecretKey');
+              return res.status(201).send({ token });
               //  res.send(req.body['email']);
             }).catch(err => {
-              console.log("The error is ",err);
-              console.log("Kunallk");
+              console.log('The error is ', err);
+              console.log('Kunallk');
               return res.status(400).send({
                 message: 'Error while inserting data'
               });
-             
             });
             //return res.send(data);
           }
         });
       }
     })
-    .catch(err => {
+    .catch(err =>{
       return res.status(502).send({
         message: 'there is database side error'
       });
     });
-})
+});
 
+app.get('/getAllCourses', (req, res) => {
+  console.log('inside getall courses');
 
-app.get('/getAllCourses',(req,res)=>{
-  console.log("inside getall courses");
-
-  MongoClient.connect(url, function(err, db) {
+  MongoClient.connect(db1, function(err, db) {
     if (err) {
       return res.status(502).send({
         message: 'there is database side error'
@@ -210,12 +207,15 @@ app.get('/getAllCourses',(req,res)=>{
     } else {
       var dbo = db.db('course_db');
       console.log('Data is ');
-      let k = dbo.collection('course').find({},{"Details.course":1}).toArray();
-      console.log("K value is",k);
+      let k = dbo
+        .collection('course')
+        .find({}, { 'Details.course': 1 })
+        .toArray();
+      console.log('K value is', k);
 
       db.close();
-      
-      k.then(data=>{
+
+      k.then(data => {
         console.log(data);
         return res.send(data);
       }).catch(err => {
@@ -223,75 +223,79 @@ app.get('/getAllCourses',(req,res)=>{
           message: 'there is database side error'
         });
       });
-     
-      
     }
   });
+});
 
-})
-
-app.post('/getSubTopics',(req,res)=>{
-  console.log("Inside get");
-  MongoClient.connect(url,function(err,db){
+app.post('/getSubTopics', (req, res) => {
+  console.log('Inside get');
+  MongoClient.connect(url, function(err, db) {
     //if error ...respond with error code
-    if(err){
+    if (err) {
       res.status(502).send({
         message: 'there is database side error'
-      })
+      });
     }
     //No error ...proceed
-    else{
-      let courseName=req.body['courseName'];
-      console.log("The course name is ",courseName);
-      var dbo=db.db('course_db');
-      let k = dbo.collection('course').find({"Details.course":courseName},{"Details.Topics.subTopic":1}).toArray();
+    else {
+      let courseName = req.body['courseName'];
+      console.log('The course name is ', courseName);
+      var dbo = db.db('course_db');
+      let k = dbo
+        .collection('course')
+        .find(
+          { 'Details.course': courseName },
+          { 'Details.Topics.subTopic': 1 }
+        )
+        .toArray();
       db.close();
-      k.then(data=>{
-          res.send(data);
-          console.log("The data is ",data);
-      })
-      .catch(err=>{
+      k.then(data => {
+        res.send(data);
+        console.log('The data is ', data);
+      }).catch(err => {
         res.status(502).send({
           message: 'there is database side error'
         });
       });
     }
-  })
-})
+  });
+});
 
-
-app.post('/getsubTopicsDetails',(req,res)=>{
-    MongoClient.connect(url,function(err,db){
-      if(err){
+app.post('/getsubTopicsDetails', (req, res) => {
+  MongoClient.connect(url, function(err, db) {
+    if (err) {
+      res.status(502).send({
+        message: 'there is database side error'
+      });
+    } else {
+      let subTopicName = req.body['subTopicName'];
+      let course = req.body['courseName'];
+      console.log('The course name is ', subTopicName);
+      var dbo = db.db('course_db');
+      let k = dbo
+        .collection('course')
+        .find(
+          {
+            $and: [
+              { 'Details.Topics.subTopic': subTopicName },
+              { 'Details.course': course }
+            ]
+          },
+          { 'Details.Topics': 1 }
+        )
+        .toArray();
+      db.close();
+      k.then(data => {
+        console.log('The data is ', data);
+        return res.send(data);
+      }).catch(err => {
         res.status(502).send({
           message: 'there is database side error'
-        })
-      }
-
-      else{
-        let subTopicName=req.body['subTopicName'];
-        let course=req.body['courseName'];
-        console.log("The course name is ",subTopicName);
-        var dbo=db.db('course_db');
-        let k = dbo.collection('course').find({$and:[{"Details.Topics.subTopic":subTopicName},
-        {"Details.course":course}]},{"Details.Topics":1}).toArray();
-        db.close();
-        k.then(data=>{
-            
-            console.log("The data is ",data);
-            return res.send(data);
-        })
-        .catch(err=>{
-          res.status(502).send({
-            message: 'there is database side error'
-          });
         });
-      }
-
-    })
-})
-
-
+      });
+    }
+  });
+});
 
 app.get('/', (req, res) => {
   res.send('welcome to the default server apge');
