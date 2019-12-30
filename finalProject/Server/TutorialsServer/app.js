@@ -7,9 +7,13 @@ const mongoose = require('mongoose');
 const url =
   'mongodb+srv://Kunal:mongodb123@clustertutorialspoint-o34i7.mongodb.net/test?retryWrites=true&w=majority';
 
-// const client = new MongoClient(url, { useNewUrlParser: true });
-// obj={"email":"kunalchhetri14@gmail.com","password":"Kunal@123"};
-// collection="MynewCOllection";
+
+const dbName="Tutorial_Online"
+
+const client = new MongoClient(url, { useNewUrlParser: true });
+obj='{"course": "C++", "topics" : [ { "subTopic" : "Introduction to C++", "content_id" : 10 },{ "subTopic" : "Bits and Bytes", "content_id" : 20 },{ "subTopic" : "Variables in C++", "content_id" : 20 },{ "subTopic" : "Introduction to C++", "content_id" : 10 },{ "subTopic" : "For Loops", "content_id" : 20 },{ "subTopic" : "While loops", "content_id" : 20 }]}';
+var insertObj=JSON.parse(obj);
+collection="CourseCollection";
 // client.connect((err,db) => {
 //   if (err) {
 //     console.log('there is error in connection');
@@ -17,7 +21,7 @@ const url =
 //     console.log('database connected');
 //     var dbo = db.db('Tutorial_Online');
 //             console.log('Data is ');
-//             let k = dbo.collection(collection).insert(obj);
+//             let k = dbo.collection(collection).insert(insertObj);
 //             db.close();
 //   }
 //   //const collection = client.db("test").collection("devices");
@@ -199,17 +203,17 @@ app.post('/SignUp', (req, res) => {
 app.get('/getAllCourses', (req, res) => {
   console.log('inside getall courses');
 
-  MongoClient.connect(db1, function(err, db) {
+  MongoClient.connect(url, function(err, db) {
     if (err) {
       return res.status(502).send({
         message: 'there is database side error'
       });
     } else {
-      var dbo = db.db('course_db');
+      var dbo = db.db(dbName);
       console.log('Data is ');
       let k = dbo
-        .collection('course')
-        .find({}, { 'Details.course': 1 })
+        .collection('CourseCollection')
+        .find({'course':'C'},{'course':1})
         .toArray();
       console.log('K value is', k);
 
@@ -240,12 +244,11 @@ app.post('/getSubTopics', (req, res) => {
     else {
       let courseName = req.body['courseName'];
       console.log('The course name is ', courseName);
-      var dbo = db.db('course_db');
+      var dbo = db.db(dbName);
       let k = dbo
-        .collection('course')
+        .collection('CourseCollection')
         .find(
-          { 'Details.course': courseName },
-          { 'Details.Topics.subTopic': 1 }
+          { 'course': courseName }
         )
         .toArray();
       db.close();
@@ -261,6 +264,8 @@ app.post('/getSubTopics', (req, res) => {
   });
 });
 
+
+///Get sub topics details by Id and courseName
 app.post('/getsubTopicsDetails', (req, res) => {
   MongoClient.connect(url, function(err, db) {
     if (err) {
@@ -268,20 +273,21 @@ app.post('/getsubTopicsDetails', (req, res) => {
         message: 'there is database side error'
       });
     } else {
-      let subTopicName = req.body['subTopicName'];
+      let subTopicId = req.body['subTopicId'];
       let course = req.body['courseName'];
-      console.log('The course name is ', subTopicName);
-      var dbo = db.db('course_db');
+      console.log('The course id is ', subTopicId, "  ",course);
+      var dbo = db.db(dbName);
       let k = dbo
-        .collection('course')
+        .collection(course)
         .find(
-          {
-            $and: [
-              { 'Details.Topics.subTopic': subTopicName },
-              { 'Details.course': course }
-            ]
-          },
-          { 'Details.Topics': 1 }
+          
+          { _id: subTopicId}
+          //   $and: [
+          //     { 'Details.Topics.subTopic': subTopicName },
+          //     { 'Details.course': course }
+          //   ]
+          // },
+          // { 'Details.Topics': 1 }
         )
         .toArray();
       db.close();
