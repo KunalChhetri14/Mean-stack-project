@@ -5,5 +5,9 @@
   }
 
   .rightalign{
-   margin-right: 8px;
+     position: absolute;
+     right:10px;
+   /* text-align: right; */
+   /* text-align: justify;  /* For Edge */
+   /* //text-align-last: left;  */
   }
