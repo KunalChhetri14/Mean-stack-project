@@ -1,0 +1,33 @@
+<form [formGroup]='PostForm' (ngSubmit)="submitData()">
+    <div fxlayout="row">
+        <div fxFlex="50"> 
+            <mat-form-field>
+                <mat-label>Select Course</mat-label>
+                <mat-select formControlName="Course">
+                  <mat-option *ngFor="let courseDoc of courseArr" [value]="courseDoc.course">
+                    {{courseDoc.course}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            <mat-form-field class="fullWidth"  >
+                <input matInput placeholder="Write the title here" formControlName="Title">
+            </mat-form-field>
+            <quill-editor  [style]="editorStyle"
+             formControlName="editor" (onContentChanged)="postData(SPANA)" ></quill-editor>
+            <br>
+            <button type="text" mat-raised-button color="primary">SUBMIT</button>
+        </div>
+        <div fxFlex="50" >
+            <span style="text-align: center;">OUTPUT</span>
+            <div #SPANA>
+
+            </div>
+        </div>
+        
+    </div>
+    
+
+
+
+
+

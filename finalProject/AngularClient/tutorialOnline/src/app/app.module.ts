@@ -15,6 +15,10 @@ import { PageNotFoundComponentComponent } from './page-not-found-component/page-
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthGuard } from './auth.guard';
 import { ServiceTutorialOnlineService } from './service-tutorial-online.service';
+import { AdminCreatPostComponent } from './admin-creat-post/admin-creat-post.component';
+import {QuillModule,QUILL_CONFIG_TOKEN} from 'ngx-quill';
+import {resize} from 'quill-image-resize-module'
+
 
 @NgModule({
   declarations: [
@@ -23,7 +27,9 @@ import { ServiceTutorialOnlineService } from './service-tutorial-online.service'
     CourseComponentComponent,
     CourseSideTopicComponent,
     MainContentPageComponent,
-    PageNotFoundComponentComponent
+    PageNotFoundComponentComponent,
+    AdminCreatPostComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -33,7 +39,8 @@ import { ServiceTutorialOnlineService } from './service-tutorial-online.service'
     ReactiveFormsModule,
     LayoutModule,
     HttpClientModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    QuillModule.forRoot(QUILL_CONFIG_TOKEN.ngInjectableDef)
   ],
   providers: [ServiceTutorialOnlineService, AuthGuard],
   bootstrap: [AppComponent]

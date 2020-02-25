@@ -3,3 +3,11 @@
        Every toolbar row uses a flexbox row layout. */
     flex: auto;
   }
+
+  .rightalign{
+     position: absolute;
+     right:10px;
+   /* text-align: right; */
+   /* text-align: justify;  /* For Edge */
+   /* //text-align-last: left;  */
+  }
