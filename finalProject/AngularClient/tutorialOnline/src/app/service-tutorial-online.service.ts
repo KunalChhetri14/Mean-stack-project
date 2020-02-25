@@ -21,11 +21,9 @@ export class ServiceTutorialOnlineService {
   regSubmittedData = {};
   loginData = {};
   submittedCourse = {};
-  constructor(private http: HttpClient,private _router:Router) {}
-
+  constructor(private http: HttpClient, private _router: Router) {}
 
   //Defining subject for LogOut Button
-
 
   public Login(loginDetails): Observable<any> {
     this.loginData['email'] = loginDetails.email;
@@ -72,13 +70,23 @@ export class ServiceTutorialOnlineService {
       .pipe(catchError(this.errHandler));
   }
 
+  public getSubTopicsContents(
+    selected_id: number,
+    courseName: string
+  ): Observable<any> {
+    let submittedDetails = { subTopicId: selected_id, courseName: courseName };
+
+    return this.http
+      .post<any>('http://localhost:3000/getsubTopicsDetails', submittedDetails)
+      .pipe(catchError(this.errHandler));
+  }
   //Checking whether logged in or not
   loginedIn() {
     return !!localStorage.getItem('token');
   }
 
-  LogOutUser(){
+  LogOutUser() {
     localStorage.removeItem('token');
-    this._router.navigateByUrl('/login')
+    this._router.navigateByUrl('/login');
   }
 }

@@ -38,7 +38,7 @@ export class CourseSideTopicComponent implements OnInit {
         //this.subTopicsContent=data.Details.Topics;
         console.log('The sub topics arr are : ', data);
 
-        this.topics = data[0].Details.Topics;
+        this.topics = data[0].topics;
         console.log('The array contents are: ', this.topics);
         console.log('The length of array is ', this.topics.length);
       },
@@ -54,15 +54,17 @@ export class CourseSideTopicComponent implements OnInit {
     //this._router.navigate([this.courseName,"MainPage"],{relativeTo:this._route});
     // this._router.navigate([this.courseName,"MainPage"],{relativeTo:this._route});
     if (this.lastTemplate != undefined) {
-      this.lastTemplate.color = 'primary';
+      this.lastTemplate.color = 'row';
     }
 
     console.log('Refresh main page contents are: ', subTopic.subTopic);
     // template.setAttribute("class","colorDiv");
-    template.color = 'warn';
+    template.color = 'primary';
     console.log('contents template is ', template);
     this.lastTemplate = template;
     // template._color="warn";
-    this._router.navigate([subTopic.subTopic], { relativeTo: this._actRoute });
+    this._router.navigate([subTopic.content_id], {
+      relativeTo: this._actRoute
+    });
   }
 }

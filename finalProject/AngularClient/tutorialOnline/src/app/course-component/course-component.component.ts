@@ -29,7 +29,7 @@ export class CourseComponentComponent implements OnInit {
   }
 
   showContent(courseDetails) {
-    this.courseName = courseDetails.Details.course;
+    this.courseName = courseDetails.course;
     this._router.navigate([this.courseName, ''], {
       relativeTo: this._route
     });

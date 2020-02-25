@@ -5,12 +5,18 @@ import { CourseComponentComponent } from './course-component/course-component.co
 import { CourseSideTopicComponent } from './course-side-topic/course-side-topic.component';
 import { PageNotFoundComponentComponent } from './page-not-found-component/page-not-found-component.component';
 import { MainContentPageComponent } from './main-content-page/main-content-page.component';
+import {AdminCreatPostComponent} from './admin-creat-post/admin-creat-post.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   // {
   //   path:'',redirectTo:'/ViewCourses',pathMatch:'full'
   // },
+  {
+    path:'admin',
+    component: AdminCreatPostComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'ViewCourses',
     component: CourseComponentComponent,

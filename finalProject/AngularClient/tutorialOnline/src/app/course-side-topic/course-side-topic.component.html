@@ -1,16 +1,15 @@
-<p>course-side-topic works!</p>
-<div fxlayout="row">
-    <div  fxFlex="20">
+<div fxlayout="row" >
+    <div   style="height:100%;" fxFlex="20">
         <div *ngFor="let subtopic of topics">
         
-            <button #temp  mat-button  color="primary" (click)="refreshMainPage(temp,subtopic)"> 
+            <button  #temp  mat-button  color="row" (click)="refreshMainPage(temp,subtopic)"> 
                {{subtopic.subTopic}}
             </button>
         
     </div>
     </div>
    
-    <div fxFlex="80">
+    <div  fxFlex="80">
             <router-outlet></router-outlet>
             
     </div>
