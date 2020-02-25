@@ -1,0 +1,106 @@
+<div class="container">
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span class="ColorText">LOGIN</span>
+    </ng-template>
+    
+    <div>
+      <form [formGroup]='LoginForm' (ngSubmit)="onLoginSubmit()" (click)="closeSnackbar()">
+        <mat-form-field class="fullWidth">
+          <input  matInput  placeholder="  Email / Username" formControlName="email">
+          <mat-icon matPrefix>mail_outline</mat-icon>
+        <mat-error> 
+          <span *ngIf="LoginForm.controls.email.hasError('notExist')">
+          Email id is not linked with any account
+          </span>
+          <span *ngIf="LoginForm.controls.email.hasError('required')">
+            Email id is required
+          </span>
+        </mat-error>
+       <mat-hint>Input the fully qualified email address</mat-hint>
+        </mat-form-field>
+            <mat-form-field class="fullWidth">
+                <input  matInput  placeholder="  password" formControlName="password" >
+                <mat-icon matPrefix>lock</mat-icon>
+              <mat-error>
+                  <span *ngIf="LoginForm.controls.password.hasError('required')">
+                      Password is required
+                    </span>
+                    <span *ngIf="LoginForm.controls.password.hasError('PasswordIncorrect')">
+                        Password is incorrect
+                      </span>
+              </mat-error>
+             <mat-hint>Enter the password</mat-hint>
+            </mat-form-field>
+
+            <button type="text" mat-raised-button color="primary">LOGIN</button>
+    </form>
+    </div>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+        <span class="ColorText">REGISTER</span> 
+    </ng-template>
+
+    <div>
+      <form  (ngSubmit)="onRegSubmit()" (click)="closeSnackbar()" [formGroup]='RegForm'>
+        <!-- <div>{{reg.value | json}} Cool</div> -->
+          <mat-form-field class="fullWidth">
+              <input  matInput  placeholder="  Email / Username" 
+              formControlName="email" >
+              <mat-icon matPrefix>mail_outline</mat-icon>
+              <mat-error>
+                <span *ngIf="RegForm.controls.email.invalid">
+                  Email is required
+                </span>
+                <span *ngIf="RegForm.controls.email.hasError('notUnique')">
+                  Email id already exist
+              </span>
+              </mat-error>
+           <mat-hint>Input the fully qualified email address</mat-hint>
+          </mat-form-field>
+
+            <mat-form-field class="fullWidth">
+                <input  matInput  placeholder="  password"  
+                formControlName="password" >
+                <mat-icon matPrefix>lock</mat-icon>
+                
+                <mat-error>
+                    <span *ngIf="RegForm.controls.password.invalid">
+                      Password must be at least 7 characters, no more than 15 characters, and must include at least one lower case letter,
+                       ,special and one numeric digit.
+                    </span>
+                   
+                    
+                    
+                    
+                </mat-error>
+               
+                
+               
+             <mat-hint>Enter the password</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="fullWidth">
+                <input   matInput 
+                placeholder=" Confirm password" 
+                formControlName="confirmPassword">
+                <mat-icon matPrefix>lock</mat-icon>
+                <mat-error>
+                    <span *ngIf="RegForm.controls.confirmPassword.invalid">
+                        Password and confirmPassword doesn't match
+                      </span>
+                </mat-error>
+                
+             <mat-hint>Confirm the password</mat-hint>
+             
+            </mat-form-field>
+            
+
+            <button type="submit" mat-raised-button color="primary">REGISTER</button>
+    </form>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+</div>

@@ -1,0 +1,8 @@
+<mat-toolbar color='primary'>
+  <span>TutorialsOnline </span>
+  <span>
+    <a style="cursor:pointer" *ngIf="_service.loginedIn()" (click)="_service.LogOutUser()">LogOut</a>
+  </span>
+</mat-toolbar>
+<router-outlet></router-outlet>
+
