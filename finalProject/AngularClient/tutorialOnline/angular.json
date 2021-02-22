@@ -28,8 +28,8 @@
               "src/styles.css"
             ],
             "scripts": [
-              "../node_modules/quill/dist/quill.min.js",
-              "../node_modules/quill-image-resize-module/image-resize.min.js"
+              "./node_modules/quill/dist/quill.min.js",
+              "./node_modules/quill-image-resize-module/image-resize.min.js"
             ]
           },
           "configurations": {
