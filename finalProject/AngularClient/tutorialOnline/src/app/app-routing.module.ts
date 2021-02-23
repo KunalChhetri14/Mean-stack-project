@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginOrRegisterComponent } from './login-or-register/login-or-register.component';
-import { CourseComponentComponent } from './course-component/course-component.component';
-import { CourseSideTopicComponent } from './course-side-topic/course-side-topic.component';
-import { PageNotFoundComponentComponent } from './page-not-found-component/page-not-found-component.component';
-import { MainContentPageComponent } from './main-content-page/main-content-page.component';
-import {AdminCreatPostComponent} from './admin-creat-post/admin-creat-post.component';
-import { AuthGuard } from './auth.guard';
+import { LoginOrRegisterComponent } from './+core-modules/+auth/login-or-register/login-or-register.component';
+import { CourseComponentComponent } from './+features/course-component/course-component.component';
+import { CourseSideTopicComponent } from './+features/course-side-topic/course-side-topic.component';
+import { PageNotFoundComponentComponent } from './+features/page-not-found-component/page-not-found-component.component';
+import { MainContentPageComponent } from './+features/main-content-page/main-content-page.component';
+import {AdminCreatPostComponent} from './+features/admin-creat-post/admin-creat-post.component';
+import { AuthGuard } from './core/auth-guard/auth.guard';
 
 const routes: Routes = [
   // {

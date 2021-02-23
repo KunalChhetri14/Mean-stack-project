@@ -1,12 +1,12 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { ServiceTutorialOnlineService } from '../service-tutorial-online.service';
+import { ServiceTutorialOnlineService } from '../../core/services/course-services/service-tutorial-online.service';
 import {
   ActivatedRoute,
   Router,
   ParamMap,
   convertToParamMap
 } from '@angular/router';
-import { subTopicModel } from '../dataModel';
+import { subTopicModel } from '../../core/models/dataModel';
 @Component({
   selector: 'app-course-side-topic',
   templateUrl: './course-side-topic.component.html',

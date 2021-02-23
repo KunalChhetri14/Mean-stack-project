@@ -7,7 +7,7 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { subTopicModel } from './dataModel';
+import { subTopicModel } from '../../models/dataModel';
 
 interface format {
   email: string;

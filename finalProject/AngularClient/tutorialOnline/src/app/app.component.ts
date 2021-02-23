@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ServiceTutorialOnlineService } from './service-tutorial-online.service';
+import { ServiceTutorialOnlineService } from './core/services/course-services/service-tutorial-online.service';
 
 @Component({
   selector: 'app-root',

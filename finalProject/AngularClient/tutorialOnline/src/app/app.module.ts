@@ -3,19 +3,19 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngularMaterialModule } from './angular-material/angular-material.module';
-import { LoginOrRegisterComponent } from './login-or-register/login-or-register.component';
+import { AngularMaterialModule } from './+angular-material-module/angular-material.module';
+import { LoginOrRegisterComponent } from './+core-modules/+auth/login-or-register/login-or-register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
-import { CourseComponentComponent } from './course-component/course-component.component';
-import { CourseSideTopicComponent } from './course-side-topic/course-side-topic.component';
-import { MainContentPageComponent } from './main-content-page/main-content-page.component';
-import { PageNotFoundComponentComponent } from './page-not-found-component/page-not-found-component.component';
+import { CourseComponentComponent } from './+features/course-component/course-component.component';
+import { CourseSideTopicComponent } from './+features/course-side-topic/course-side-topic.component';
+import { MainContentPageComponent } from './+features/main-content-page/main-content-page.component';
+import { PageNotFoundComponentComponent } from './+features/page-not-found-component/page-not-found-component.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { AuthGuard } from './auth.guard';
-import { ServiceTutorialOnlineService } from './service-tutorial-online.service';
-import { AdminCreatPostComponent } from './admin-creat-post/admin-creat-post.component';
+import { AuthGuard } from './core/auth-guard/auth.guard'
+import { ServiceTutorialOnlineService } from './core/services/course-services/service-tutorial-online.service';
+import { AdminCreatPostComponent } from './+features/admin-creat-post/admin-creat-post.component';
 import {QuillModule,QUILL_CONFIG_TOKEN} from 'ngx-quill';
 import {resize} from 'quill-image-resize-module'
 

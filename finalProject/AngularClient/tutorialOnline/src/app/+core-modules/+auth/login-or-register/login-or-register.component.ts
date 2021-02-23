@@ -6,7 +6,7 @@ import {
   FormBuilder
 } from '@angular/forms';
 import { passwordValidator, confirmPassValidator } from './customValidator';
-import { ServiceTutorialOnlineService } from '../service-tutorial-online.service';
+import { ServiceTutorialOnlineService } from '../../../core/services/course-services/service-tutorial-online.service';
 import { MatSnackBar } from '@angular/material';
 import { Action } from 'rxjs/internal/scheduler/Action';
 import { Router, ActivatedRoute } from '@angular/router';

@@ -3,9 +3,9 @@ import {FormGroup, FormBuilder, FormControl, Validators,} from '@angular/forms'
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
 import Quill from 'quill';
 import {resize} from 'quill-image-resize-module';
-import { ServiceTutorialOnlineService } from '../service-tutorial-online.service';
-import {MatSelect} from '@angular/material/select'
-import { AdminServiceService } from '../admin-service.service';
+import { ServiceTutorialOnlineService } from '../../core/services/course-services/service-tutorial-online.service';
+import {MatSelect} from '@angular/material/select';
+import { AdminServiceService } from '../../core/services/admin-services/admin-service.service';
 
 @Component({
   selector: 'app-admin-creat-post',
