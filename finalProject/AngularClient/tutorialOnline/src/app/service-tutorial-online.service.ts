@@ -5,8 +5,9 @@ import {
   HttpErrorResponse
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { subTopicModel } from './dataModel';
 
 interface format {
   email: string;
@@ -55,30 +56,52 @@ export class ServiceTutorialOnlineService {
   }
 
   //Getting the course details
-  public getAllCourses(): Observable<any> {
+  public getAllCourses(): Observable<string[]> {
     return this.http
       .get<any>('http://localhost:3000/getAllCourses')
-      .pipe(catchError(this.errHandler));
+      .pipe(
+        map((item: any) => {
+          return item[0].Courses;
+        }),catchError(this.errHandler));
   }
 
   //Getting the subtopics for Course-side-topic components
-  public getSubTopics(selected_Course): Observable<any> {
+  public getSubTopics(selected_Course): Observable<subTopicModel[]> {
     console.log('Inside service of getSubtopics ', selected_Course);
     this.submittedCourse['courseName'] = selected_Course;
     return this.http
       .post<any>('http://localhost:3000/getSubTopics', this.submittedCourse)
-      .pipe(catchError(this.errHandler));
+      .pipe(
+        map((response: any) => {
+          const subTopics: Array<subTopicModel> = response.map(item=> {
+            return {
+              subTopic: item.subTopic,
+              subTopicId: item._id
+            } as subTopicModel
+          })
+          return subTopics;
+        }),catchError(this.errHandler));
   }
 
   public getSubTopicsContents(
     selected_id: number,
     courseName: string
-  ): Observable<any> {
+  ): Observable<subTopicModel[]> {
     let submittedDetails = { subTopicId: selected_id, courseName: courseName };
 
     return this.http
       .post<any>('http://localhost:3000/getsubTopicsDetails', submittedDetails)
-      .pipe(catchError(this.errHandler));
+      .pipe(
+        map((response: any) => {
+          const subTopics: Array<subTopicModel> = response.map(item=> {
+            return {
+              subTopic: item.subTopic,
+              subTopicId: item._id,
+              content: item.content
+            } as subTopicModel
+          })
+          return subTopics;
+        }), catchError(this.errHandler));
   }
   //Checking whether logged in or not
   loginedIn() {

@@ -1,8 +1,8 @@
 <div fxlayout="row" >
     <div   style="height:100%;" fxFlex="20">
-        <div *ngFor="let subtopic of topics">
+        <div *ngFor="let subtopic of topics, index as i">
         
-            <button  #temp  mat-button  color="row" (click)="refreshMainPage(temp,subtopic)"> 
+            <button [ngClass]="{'colorHighlight': isFirstSubTopic}" #temp  mat-button  color="row" (click)="refreshMainPage(temp,subtopic)"> 
                {{subtopic.subTopic}}
             </button>
         

@@ -8,7 +8,8 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./course-component.component.css']
 })
 export class CourseComponentComponent implements OnInit {
-  courseArr = [];
+  // courseArr = Array<string>;
+  courseArr: Array<string>;
   courseName: string = '';
   courseUrl = 'course/';
   constructor(
@@ -28,8 +29,8 @@ export class CourseComponentComponent implements OnInit {
     );
   }
 
-  showContent(courseDetails) {
-    this.courseName = courseDetails.course;
+  showContent(course) {
+    this.courseName = course;
     this._router.navigate([this.courseName, ''], {
       relativeTo: this._route
     });

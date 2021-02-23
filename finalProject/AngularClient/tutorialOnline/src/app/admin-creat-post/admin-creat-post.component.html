@@ -4,8 +4,8 @@
             <mat-form-field>
                 <mat-label>Select Course</mat-label>
                 <mat-select formControlName="Course">
-                  <mat-option *ngFor="let courseDoc of courseArr" [value]="courseDoc.course">
-                    {{courseDoc.course}}
+                  <mat-option *ngFor="let courseDoc of courseArr" [value]="courseDoc">
+                    {{courseDoc}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>

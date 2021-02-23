@@ -126,6 +126,9 @@ export class LoginOrRegisterComponent implements OnInit {
 
             //Storing in localStorage for authetication
             localStorage.setItem('token', data.token);
+            this._snackbar.open(`
+              Registration Successful: Try logging in.
+            `);
           },
           err => {
             console.log('the error status in Reg is ', err.status);

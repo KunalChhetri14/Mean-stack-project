@@ -35,7 +35,7 @@ editor_modules = {
     },
     resize: {}
   };
-  courseArr;
+  courseArr: Array<string>;
   constructor(private _adminservice:AdminServiceService,private _service:ServiceTutorialOnlineService,private fb:FormBuilder) { 
     this.PostForm=this.fb.group({
       'Course':['',

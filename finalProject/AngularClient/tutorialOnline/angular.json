@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "tutorialOnline"
+  "defaultProject": "tutorialOnline",
+  "cli": {
+    "analytics": "138de0cc-6887-48f1-a81a-64a62b6f5f71"
+  }
 }

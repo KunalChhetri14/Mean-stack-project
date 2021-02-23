@@ -6,22 +6,30 @@ import {
   ParamMap,
   convertToParamMap
 } from '@angular/router';
+import { subTopicModel } from '../dataModel';
 @Component({
   selector: 'app-course-side-topic',
   templateUrl: './course-side-topic.component.html',
   styleUrls: ['./course-side-topic.component.css']
 })
-export class CourseSideTopicComponent implements OnInit {
+export class CourseSideTopicComponent implements OnInit, AfterViewInit {
   constructor(
     private _service: ServiceTutorialOnlineService,
     private _actRoute: ActivatedRoute,
     private _router: Router
   ) {}
+
+  public isFirstSubTopic: boolean = false;
+  ngAfterViewInit(): void {
+   
+  }
+
   courseSubTopics = [];
   subTopicsContent = [];
-  topics = [];
+  topics : Array<subTopicModel>=[];
   course: string;
   lastTemplate = undefined;
+
   ngOnInit() {
     // let url=window.location.href.split("/");
     // let course=decodeURIComponent(url[url.length-1]);
@@ -38,9 +46,16 @@ export class CourseSideTopicComponent implements OnInit {
         //this.subTopicsContent=data.Details.Topics;
         console.log('The sub topics arr are : ', data);
 
-        this.topics = data[0].topics;
+        this.topics = data;
         console.log('The array contents are: ', this.topics);
         console.log('The length of array is ', this.topics.length);
+        if(this._actRoute.snapshot.children.length === 0) {
+          this.isFirstSubTopic = true;
+          this.routeToSubTopicContent(this.topics[0]);
+        }
+        else {
+          this.isFirstSubTopic = false;
+        }
       },
       err => {
         console.log('Error is ', err);
@@ -50,7 +65,13 @@ export class CourseSideTopicComponent implements OnInit {
     // this._router.navigate('')
   }
 
-  refreshMainPage(template, subTopic) {
+  routeToSubTopicContent(subTopic: subTopicModel) {
+    this._router.navigate([subTopic.subTopicId], {
+      relativeTo: this._actRoute
+    });
+  }
+
+  refreshMainPage(template, subTopic: subTopicModel ) {
     //this._router.navigate([this.courseName,"MainPage"],{relativeTo:this._route});
     // this._router.navigate([this.courseName,"MainPage"],{relativeTo:this._route});
     if (this.lastTemplate != undefined) {
@@ -63,8 +84,6 @@ export class CourseSideTopicComponent implements OnInit {
     console.log('contents template is ', template);
     this.lastTemplate = template;
     // template._color="warn";
-    this._router.navigate([subTopic.content_id], {
-      relativeTo: this._actRoute
-    });
+    this.routeToSubTopicContent(subTopic);
   }
 }
