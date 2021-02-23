@@ -6,6 +6,7 @@ import {resize} from 'quill-image-resize-module';
 import { ServiceTutorialOnlineService } from '../../core/services/course-services/service-tutorial-online.service';
 import {MatSelect} from '@angular/material/select';
 import { AdminServiceService } from '../../core/services/admin-services/admin-service.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-creat-post',
@@ -36,7 +37,10 @@ editor_modules = {
     resize: {}
   };
   courseArr: Array<string>;
-  constructor(private _adminservice:AdminServiceService,private _service:ServiceTutorialOnlineService,private fb:FormBuilder) { 
+  constructor(private _adminservice:AdminServiceService,
+              private _service:ServiceTutorialOnlineService,
+              private fb:FormBuilder,
+              private _snackbar: MatSnackBar,) { 
     this.PostForm=this.fb.group({
       'Course':['',
                 [Validators.required]
@@ -84,7 +88,7 @@ editor_modules = {
     console.log(this.PostForm.value);
     this._adminservice.insertNewContent(this.PostForm.value).subscribe(data=>{
       console.log("succesfully inserted ",data);
-
+      this._snackbar.open(`Content added with id ${data}`);
     },
     err=>{
       console.log('error ');

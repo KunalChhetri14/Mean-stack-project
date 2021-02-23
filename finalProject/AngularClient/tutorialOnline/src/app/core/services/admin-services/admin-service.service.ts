@@ -5,7 +5,7 @@ import {
   HttpErrorResponse
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +20,13 @@ export class AdminServiceService {
     return throwError(err);
   }
 
-  public insertNewContent(contentDetails){
+  public insertNewContent(contentDetails): Observable<number>{
     
     return this.http
         .post<any>('http://localhost:3000/insertNewContent', contentDetails)
-        .pipe(catchError(this.errHandler));
+        .pipe(
+          map((response: any) => {
+            return response;
+          }),catchError(this.errHandler));
   }
 }
