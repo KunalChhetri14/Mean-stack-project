@@ -213,7 +213,7 @@ app.get('/getAllCourses', (req, res) => {
       console.log('Data is ');
       let k = dbo
         .collection('CourseCollection')
-        .find({'course':'C'},{'course':1})
+        .find()
         .toArray();
       console.log('K value is', k);
 
@@ -246,10 +246,8 @@ app.post('/getSubTopics', (req, res) => {
       console.log('The course name is ', courseName);
       var dbo = db.db(dbName);
       let k = dbo
-        .collection('CourseCollection')
-        .find(
-          { 'course': courseName }
-        )
+        .collection(`${courseName}`)
+        .find({}, {"subTopic": 1})
         .toArray();
       db.close();
       k.then(data => {
