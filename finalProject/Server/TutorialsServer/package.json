@@ -17,6 +17,7 @@
     "mongodb": "^3.3.5",
     "mongoose": "^5.7.13",
     "morgan": "~1.9.1",
+    "nodemon": "^2.0.7",
     "prettier": "^1.19.1"
   }
 }

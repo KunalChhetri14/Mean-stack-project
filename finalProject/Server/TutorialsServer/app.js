@@ -9,7 +9,8 @@ const url =
 
 
 const dbName="Tutorial_Online"
-
+module.exports = MongoClient;
+module.exports = express;
 const client = new MongoClient(url, { useNewUrlParser: true });
 obj='{"course": "C++", "topics" : [ { "subTopic" : "Introduction to C++", "content_id" : 10 },{ "subTopic" : "Bits and Bytes", "content_id" : 20 },{ "subTopic" : "Variables in C++", "content_id" : 20 },{ "subTopic" : "Introduction to C++", "content_id" : 10 },{ "subTopic" : "For Loops", "content_id" : 20 },{ "subTopic" : "While loops", "content_id" : 20 }]}';
 var insertObj=JSON.parse(obj);
@@ -36,6 +37,8 @@ app.use(bodyPar.urlencoded({ extended: true }));
 app.use(cors());
 let arr = [];
 app.use(express.json());
+
+var courseController = require('./controllers/course.controller');
 
 function getMail(jsonObj) {
   console.log('There is some kindof error');
@@ -200,106 +203,18 @@ app.post('/SignUp', (req, res) => {
     });
 });
 
-app.get('/getAllCourses', (req, res) => {
-  console.log('inside getall courses');
 
-  MongoClient.connect(url, function(err, db) {
-    if (err) {
-      return res.status(502).send({
-        message: 'there is database side error'
-      });
-    } else {
-      var dbo = db.db(dbName);
-      console.log('Data is ');
-      let k = dbo
-        .collection('CourseCollection')
-        .find()
-        .toArray();
-      console.log('K value is', k);
+app.get('/getAllCourses', courseController.getAllCourses);
 
-      db.close();
+app.post('/insertNewContent', (req, res) => {
+  console.log(req.body);
+})
 
-      k.then(data => {
-        console.log(data);
-        return res.send(data);
-      }).catch(err => {
-        return res.status(502).send({
-          message: 'there is database side error'
-        });
-      });
-    }
-  });
-});
-
-app.post('/getSubTopics', (req, res) => {
-  console.log('Inside get');
-  MongoClient.connect(url, function(err, db) {
-    //if error ...respond with error code
-    if (err) {
-      res.status(502).send({
-        message: 'there is database side error'
-      });
-    }
-    //No error ...proceed
-    else {
-      let courseName = req.body['courseName'];
-      console.log('The course name is ', courseName);
-      var dbo = db.db(dbName);
-      let k = dbo
-        .collection(`${courseName}`)
-        .find({}, {"subTopic": 1})
-        .toArray();
-      db.close();
-      k.then(data => {
-        res.send(data);
-        console.log('The data is ', data);
-      }).catch(err => {
-        res.status(502).send({
-          message: 'there is database side error'
-        });
-      });
-    }
-  });
-});
-
+//get sub topics of particular course
+app.post('/getSubTopics', courseController.getSubTopics);
 
 ///Get sub topics details by Id and courseName
-app.post('/getsubTopicsDetails', (req, res) => {
-  MongoClient.connect(url, function(err, db) {
-    if (err) {
-      res.status(502).send({
-        message: 'there is database side error'
-      });
-    } else {
-      let subTopicId = req.body['subTopicId'];
-      let course = req.body['courseName'];
-      console.log('The course id is ', subTopicId, "  ",course);
-      var dbo = db.db(dbName);
-      let k = dbo
-        .collection(course)
-        .find(
-          
-          { _id: subTopicId}
-          //   $and: [
-          //     { 'Details.Topics.subTopic': subTopicName },
-          //     { 'Details.course': course }
-          //   ]
-          // },
-          // { 'Details.Topics': 1 }
-        )
-        .toArray();
-      db.close();
-      k.then(data => {
-        console.log('The data is ', data);
-        return res.send(data);
-      }).catch(err => {
-        res.status(502).send({
-          message: 'there is database side error'
-        });
-      });
-    }
-  });
-});
+app.post('/getsubTopicsDetails', courseController.getSubTopicContentById);
 
 app.get('/', (req, res) => {
   res.send('welcome to the default server apge');
