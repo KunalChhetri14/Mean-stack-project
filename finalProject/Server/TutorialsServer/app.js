@@ -15,23 +15,9 @@ const client = new MongoClient(url, { useNewUrlParser: true });
 obj='{"course": "C++", "topics" : [ { "subTopic" : "Introduction to C++", "content_id" : 10 },{ "subTopic" : "Bits and Bytes", "content_id" : 20 },{ "subTopic" : "Variables in C++", "content_id" : 20 },{ "subTopic" : "Introduction to C++", "content_id" : 10 },{ "subTopic" : "For Loops", "content_id" : 20 },{ "subTopic" : "While loops", "content_id" : 20 }]}';
 var insertObj=JSON.parse(obj);
 collection="CourseCollection";
-// client.connect((err,db) => {
-//   if (err) {
-//     console.log('there is error in connection');
-//   } else {
-//     console.log('database connected');
-//     var dbo = db.db('Tutorial_Online');
-//             console.log('Data is ');
-//             let k = dbo.collection(collection).insert(insertObj);
-//             db.close();
-//   }
-//   //const collection = client.db("test").collection("devices");
-//   //perform actions on the collection object
-// });
 
 var cors = require('cors');
 
-// const port=3000;
 var db1 = 'mongodb://127.0.0.1:27017/';
 app.use(bodyPar.urlencoded({ extended: true }));
 app.use(cors());
@@ -39,6 +25,8 @@ let arr = [];
 app.use(express.json());
 
 var courseController = require('./controllers/course.controller');
+var authController = require('./controllers/auth.controller');
+var adminController = require('./controllers/admin.controller');
 
 function getMail(jsonObj) {
   console.log('There is some kindof error');
@@ -47,10 +35,6 @@ function getMail(jsonObj) {
       console.log('first line in promise');
       if (err) {
         console.log('Mongodb client not connect');
-        // return res.status(230).send({
-
-        //   message: 'There is database error'
-        // })
         reject(err);
       } else {
         console.log('no error and checking for element');
@@ -75,140 +59,18 @@ function getMail(jsonObj) {
   });
 }
 
-app.post('/Login', (req, res) => {
-  //check whether the email is linked with current registered mails
-  getMail(req.body['email'])
-    .then(function(data) {
-      if (data.length === 0) {
-        console.log("Email id doesn't exist");
-        return res.status(400).send({
-          message: 'No EmailId linked'
-        });
-      } else {
-        //Check for credentials and if true Redirect to Homepage
-        let verifyPassword = new Promise(function(resolve, reject) {
-          MongoClient.connect(url, function(err, db) {
-            if (err) {
-              console.log('Mongodb client not connected');
-              return res.status(502).send({
-                message: 'there is database side error'
-              });
-            } else {
-              var dbo = db.db('Tutorial_Online');
-
-              totalcount = dbo
-                .collection('Users_Credentials')
-                .find({
-                  email: req.body['email'],
-                  password: req.body['password']
-                })
-                .toArray(function(err, data) {
-                  if (data) {
-                    console.log('Succesful login');
-                    resolve(data);
-                  }
-                  if (err) {
-                    console.log('error inside toArray');
-                  }
-                });
-
-              db.close();
-            }
-          });
-        });
-
-        //Resolving promise which resolves true on credentials match
-        verifyPassword
-          .then(data => {
-            if (data.length > 0) {
-              console.log('before returning');
-              let document_id = data[0]._id;
-              let payload = { subject: document_id };
-              let token = jwt.sign(payload, 'SecretKey');
-
-              return res.status(201).send({ token });
-              // return res.status(100).send({
-              //   message:'Login Successful'
-              // })
-            } else {
-              console.log('length is equal to 0');
-              //if credentials doesn't match
-              return res.status(400).send({
-                message: 'PasswordIncorrect'
-              });
-            }
-          })
-          .catch(err => {
-            return res.status(502).send({
-              message: 'there is database side error'
-            });
-          });
-      }
-    })
-    .catch(err => {
-      return res.status(502).send({
-        message: 'there is database side error'
-      });
-    });
-});
+app.post('/Login', authController.login)
 
 // Sign Up for Registration
-app.post('/SignUp', (req, res) => {
-  var jsonObj = req.body['email'];
-  getMail(jsonObj)
-    .then(function(data) {
-      console.log('data is ', data);
-      console.log('Length is ', data.length);
-      if (data.length > 0) {
-        return res.status(400).send({
-          message: 'Email Id already exists!'
-        });
-      } else {
-        MongoClient.connect(url, function(err, db) {
-          if (err) {
-            return res.status(502).send({
-              message: 'there is database side error'
-            });
-          } else {
-            var dbo = db.db('Tutorial_Online');
-            console.log('Data is ');
-            let k = dbo.collection('Users_Credentials').insert(req.body);
-            db.close();
-
-            k.then(insertedData => {
-              console.log('New email id inserted');
-              console.log('Credentials entered is ', insertedData);
-              let regId = insertedData.ops[0]._id;
-              console.log('Reg Id is \n ', regId);
-              let payload = { subject: regId };
-              let token = jwt.sign(payload, 'SecretKey');
-              return res.status(201).send({ token });
-              //  res.send(req.body['email']);
-            }).catch(err => {
-              console.log('The error is ', err);
-              console.log('Kunallk');
-              return res.status(400).send({
-                message: 'Error while inserting data'
-              });
-            });
-            //return res.send(data);
-          }
-        });
-      }
-    })
-    .catch(err =>{
-      return res.status(502).send({
-        message: 'there is database side error'
-      });
-    });
-});
+app.post('/SignUp', authController.signUp);
 
 
 app.get('/getAllCourses', courseController.getAllCourses);
 
-app.post('/insertNewContent', (req, res) => {
-  console.log(req.body);
-})
+app.post('/insertNewContent', adminController.insertNewCourseContent)
+// app.post('/insertNewContent', (req, res) => {
+//   console.log(req.body);
+// })
 
 //get sub topics of particular course
 app.post('/getSubTopics', courseController.getSubTopics);

@@ -60,3 +60,5 @@ exports.getSubTopicContentById = async function(courseName, id) {
         mongoClient.close();
     }
 }
+
+// exports.insertNewContent = async function(courseName,)

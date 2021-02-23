@@ -1,4 +1,4 @@
-var courseServices = require('../services/course.services');
+// var courseServices = require('../services/course.services');
 var app = require('../app');
 var courseService = require('../services/course.services');
 
@@ -45,6 +45,15 @@ exports.getSubTopicContentById = async function(req, res) {
             message: err.message
         })
     }
+  }
+
+  exports.insertNewContent = async function(req, res) {
+      try {
+
+      }
+      catch(err) {
+
+      }
   }
 
 
