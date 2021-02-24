@@ -4,7 +4,7 @@ import {
   HttpHeaders,
   HttpErrorResponse
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { subTopicModel } from '../../models/dataModel';
@@ -22,6 +22,7 @@ export class ServiceTutorialOnlineService {
   regSubmittedData = {};
   loginData = {};
   submittedCourse = {};
+
   constructor(private http: HttpClient, private _router: Router) {}
 
   //Defining subject for LogOut Button
@@ -32,6 +33,9 @@ export class ServiceTutorialOnlineService {
     return this.http
       .post<any>('http://localhost:3000/Login', this.loginData)
       .pipe(
+        map(response => {
+          return response;
+        }),
         catchError(err => {
           console.log('Error in login service');
           return throwError(err);

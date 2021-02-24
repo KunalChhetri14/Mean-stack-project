@@ -2,7 +2,7 @@
     <div   style="height:100%;" fxFlex="20">
         <div *ngFor="let subtopic of topics, index as i">
         
-            <button [ngClass]="{'colorHighlight': isFirstSubTopic}" #temp  mat-button  color="row" (click)="refreshMainPage(temp,subtopic)"> 
+            <button [ngClass]="{'colorHighlight': isFirstSubTopic && i === 0}" #temp  mat-button  color="row" (click)="refreshMainPage(temp,subtopic)"> 
                {{subtopic.subTopic}}
             </button>
         

@@ -1,8 +1,12 @@
 <mat-toolbar style="background-color:#05386B; color: white; max-height:15%">
   <span>TutorialsOnline </span>
   <span class="rightalign">
-    <a style="cursor:pointer" *ngIf="_service.loginedIn()" (click)="_service.LogOutUser()">
+    <ng-container *ngIf="_service.loginedIn()">
+      <a style="cursor: pointer; margin-right: 20px;" (click)="routeToAdmin()">Admin Panel</a>
+      <a style="cursor:pointer" (click)="_service.LogOutUser()">
         LogOut</a>
+    </ng-container>
+    
   </span>
 </mat-toolbar>
 <router-outlet></router-outlet>

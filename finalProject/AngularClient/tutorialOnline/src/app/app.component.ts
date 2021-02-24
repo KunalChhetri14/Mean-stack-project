@@ -12,8 +12,14 @@ export class AppComponent implements OnInit {
   urlMatch;
   talk = '';
   AppComponent(_router: Router) {}
-  constructor(private _service: ServiceTutorialOnlineService) {}
+  constructor(private _service: ServiceTutorialOnlineService,
+              private router: Router) {}
   loggedIn = false;
+
+  routeToAdmin() {
+    this.router.navigateByUrl('/admin');
+  }
+
   ngOnInit() {
     this.loggedIn = this._service.loginedIn();
     this.talk = 'Hey angular!';

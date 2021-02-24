@@ -49,12 +49,12 @@ export class CourseSideTopicComponent implements OnInit, AfterViewInit {
         this.topics = data;
         console.log('The array contents are: ', this.topics);
         console.log('The length of array is ', this.topics.length);
-        if(this._actRoute.snapshot.children.length === 0) {
+        let newUrl = decodeURIComponent(this._router.url);
+        let len = this.course.length;
+        let str = newUrl.slice(-(len+1));  
+        if(str.includes(this.course)) {
           this.isFirstSubTopic = true;
-          this.routeToSubTopicContent(this.topics[0]);
-        }
-        else {
-          this.isFirstSubTopic = false;
+          this.routeToSubTopicContent(this.topics[0]); 
         }
       },
       err => {
@@ -74,6 +74,7 @@ export class CourseSideTopicComponent implements OnInit, AfterViewInit {
   refreshMainPage(template, subTopic: subTopicModel ) {
     //this._router.navigate([this.courseName,"MainPage"],{relativeTo:this._route});
     // this._router.navigate([this.courseName,"MainPage"],{relativeTo:this._route});
+    this.isFirstSubTopic = false;
     if (this.lastTemplate != undefined) {
       this.lastTemplate.color = 'row';
     }

@@ -58,8 +58,8 @@ export class LoginOrRegisterComponent implements OnInit {
           //       this._snackbar.open(`
           //     LOGIN SUCCESSFUL
           // `);
-          console.log('the token is ', data.token);
-          localStorage.setItem('token', data.token);
+          console.log('the token is ', data);
+          localStorage.setItem('token', data);
           this._router.navigateByUrl('/ViewCourses');
           // this._router.navigate(['ViewCourses'], { relativeTo: this._route });
         },

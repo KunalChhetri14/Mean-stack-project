@@ -16,8 +16,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AdminCreatPostComponent implements OnInit {
   PostForm: FormGroup;
   editorStyle={
-    height:'300px',
-    width:'200px'
+    height:'300px'
   }
 
   contentUpload;

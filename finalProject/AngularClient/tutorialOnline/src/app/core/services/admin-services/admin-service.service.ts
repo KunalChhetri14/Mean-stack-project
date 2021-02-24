@@ -26,7 +26,7 @@ export class AdminServiceService {
         .post<any>('http://localhost:3000/insertNewContent', contentDetails)
         .pipe(
           map((response: any) => {
-            return response;
+            return response.id;
           }),catchError(this.errHandler));
   }
 }
