@@ -12,11 +12,14 @@ exports.insertNewCourseContent = async function(courseName, subTopicNew, content
         let maxIdColumn = await collection.find().sort({_id:-1}).limit(1).toArray();
         let maxID = maxIdColumn[0]._id;
         console.log("Prints: ", maxIdColumn);
-        let newContent = await collection.insert({_id: maxID + 5, subTopic: subTopicNew, subcontent: content});
-        console.log("successful: ", id);
-        return newContent._id;
+        let newContent = await collection.insert({_id: maxID + 5, subTopic: subTopicNew, content: content});
+        // console.log("successful: ", id);
+        // console.log("succesful", newContent.op[0]._id);
+        console.log("succesful", maxID + 5);
+        return maxID + 5;
     }
     catch(err) {
+        console.log("the error is ",err);
         throw Error('error in database query');
     }
     finally {

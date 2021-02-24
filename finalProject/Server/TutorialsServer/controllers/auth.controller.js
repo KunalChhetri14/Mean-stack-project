@@ -81,14 +81,15 @@ exports.login = function(req, res)  {
             .then(data => {
               if (data.length > 0) {
                 console.log('before returning');
+                console.log("login data is ", data);
                 let document_id = data[0]._id;
-                let payload = { subject: document_id };
-                let token = jwt.sign(payload, 'SecretKey');
+                // let payload = { subject: document_id };
+                // let token = jwt.sign(payload, 'SecretKey');
   
-                return res.status(201).send({ token });
-                // return res.status(100).send({
-                //   message:'Login Successful'
-                // })
+                // return res.status(201).send({ token });
+                return res.send({
+                  message:'Login Successful'
+                })
               } else {
                 console.log('length is equal to 0');
                 //if credentials doesn't match
@@ -138,9 +139,9 @@ exports.signUp = function(req, res) {
                 console.log('Credentials entered is ', insertedData);
                 let regId = insertedData.ops[0]._id;
                 console.log('Reg Id is \n ', regId);
-                let payload = { subject: regId };
-                let token = jwt.sign(payload, 'SecretKey');
-                return res.status(201).send({ token });
+                // let payload = { subject: regId };
+                // let token = jwt.sign(payload, 'SecretKey');
+                return res.status(201).send({ regId });
                 //  res.send(req.body['email']);
               }).catch(err => {
                 console.log('The error is ', err);
